@@ -1,12 +1,12 @@
 buildscript {
 	repositories {
-	    maven {
-    	    url "$System.env.artifactory_contextUrl/gradle-dev"
-        	credentials {
+		maven {
+			url "$System.env.artifactory_contextUrl/gradle-dev"
+			credentials {
 				username = "$System.env.artifactory_user"
 				password = "$System.env.artifactory_password"
 			}
-    	}
+    		}
 	}
 	dependencies {
 		classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.11.0'
@@ -16,7 +16,7 @@ buildscript {
 plugins {
 	id 'maven'
 	id 'com.jfrog.artifactory' version '4.11.0'
-    id 'java-library'
+	id 'java-library'
 }
 
 apply plugin: 'com.jfrog.artifactory'
@@ -29,13 +29,13 @@ version = '1.0.0-SNAPSHOT'
 
 // this is needed for the eclipse gradle plugin
 repositories {
-    maven {
-   	    url "$System.env.artifactory_contextUrl/gradle-dev"
-       	credentials {
+	maven {
+		url "$System.env.artifactory_contextUrl/gradle-dev"
+		credentials {
 			username = "$System.env.artifactory_user"
 			password = "$System.env.artifactory_password"
 		}
-   	}
+	}
 }
 
 dependencies {
@@ -53,7 +53,6 @@ artifactory {
 			username = "$System.env.artifactory_user"
 			password = "$System.env.artifactory_password"
 			maven = true
-			
 		}
 		defaults {
 			publishConfigs('archives')

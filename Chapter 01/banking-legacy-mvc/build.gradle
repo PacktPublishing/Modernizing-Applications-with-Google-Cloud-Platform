@@ -1,12 +1,12 @@
 buildscript {
 	repositories {
-	    maven {
-    	    url "$System.env.artifactory_contextUrl/gradle-dev"
-        	credentials {
+		maven {
+			url "$System.env.artifactory_contextUrl/gradle-dev"
+			credentials {
 				username = "$System.env.artifactory_user"
 				password = "$System.env.artifactory_password"
 			}
-    	}
+    		}
 	}
 	dependencies {
 		classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.11.0'
@@ -16,11 +16,11 @@ buildscript {
 plugins {
 	id 'maven'
 	id 'com.jfrog.artifactory' version '4.11.0'
-    id 'java-library'
-    id 'war'
-    id 'org.gretty' version '2.3.1'
-    id 'org.springframework.boot' version "2.0.5.RELEASE"
-    id "io.spring.dependency-management" version "1.0.8.RELEASE"
+	id 'java-library'
+	id 'war'
+	id 'org.gretty' version '2.3.1'
+	id 'org.springframework.boot' version "2.0.5.RELEASE"
+	id "io.spring.dependency-management" version "1.0.8.RELEASE"
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -34,13 +34,13 @@ version = '1.0.0-SNAPSHOT'
 
 // this is needed for the eclipse gradle plugin
 repositories {
-    maven {
-   	    url "$System.env.artifactory_contextUrl/gradle-dev"
-       	credentials {
+	maven {
+		url "$System.env.artifactory_contextUrl/gradle-dev"
+		credentials {
 			username = "$System.env.artifactory_user"
 			password = "$System.env.artifactory_password"
 		}
-   	}
+	}
 }
 
 dependencies {
