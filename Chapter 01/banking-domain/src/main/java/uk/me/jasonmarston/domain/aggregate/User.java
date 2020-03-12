@@ -122,10 +122,10 @@ public class User extends AbstractAggregate implements UserDetails {
 	private boolean enabled = false;
 
 	@Column(columnDefinition="TIMESTAMP")
-	private ZonedDateTime lastLogin;
+	private ZonedDateTime lastLogin = _getTestDateTime();
 
 	@Column(columnDefinition="TIMESTAMP")
-	private ZonedDateTime lastLoginFailure;
+	private ZonedDateTime lastLoginFailure = _getTestDateTime();
 
 	private int failedLogins = 0;
 
@@ -164,6 +164,10 @@ public class User extends AbstractAggregate implements UserDetails {
 
 	private ZonedDateTime _updateAccountNonLocked() {
 		final ZonedDateTime dateTime = _getTestDateTime(); 
+		if(lastLoginFailure == null) {
+			failedLogins = 0;
+			return dateTime;
+		}
 		if(dateTime.isAfter(lastLoginFailure)) {
 			failedLogins = 0;
 		}
@@ -238,6 +242,9 @@ public class User extends AbstractAggregate implements UserDetails {
 			return true;
 		}
 		final ZonedDateTime dateTime = _updateAccountNonLocked();
+		if(lastLoginFailure == null) {
+			return true;
+		}
 		if(dateTime.isAfter(lastLoginFailure)) {
 			return true;
 		}

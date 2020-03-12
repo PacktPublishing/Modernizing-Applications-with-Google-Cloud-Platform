@@ -1,0 +1,15 @@
+info:
+  title: Virtual Machine Template
+  author: Jason Marston
+  description: Creates a Virtual Machine Instance
+  version: 1.0
+
+imports:
+- path: my-first-deployment-v2.jinja
+
+properties:
+  zone:
+    type: string
+    default: europe-west2-c
+    enum: [ europe-west2-a, europe-west2-b, europe-west2-c ]
+    description: The zone the Virtual Machine will be deployed in

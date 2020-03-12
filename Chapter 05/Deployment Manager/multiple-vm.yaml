@@ -1,0 +1,12 @@
+imports:
+- path: my-first-deployment-v3.jinja
+
+resources:
+- name: first
+  type: my-first-deployment-v3.jinja
+  properties:
+    zone: europe-west2-c
+- name: second
+  type: my-first-deployment-v3.jinja
+  properties:
+    zone: europe-west2-c

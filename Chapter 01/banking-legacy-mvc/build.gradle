@@ -43,6 +43,10 @@ repositories {
 	}
 }
 
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -58,7 +62,7 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	
 	// bespoke application dependencies
-	implementation 'uk.me.jasonmarston.domain:banking-domain:1.0.0-SNAPSHOT'
+	implementation group: "uk.me.jasonmarston.domain", name: "banking-domain", version: "1.0.0-SNAPSHOT", changing: true
 }
 
 artifactory {

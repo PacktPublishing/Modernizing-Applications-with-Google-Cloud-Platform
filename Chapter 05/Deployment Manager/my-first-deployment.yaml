@@ -1,0 +1,18 @@
+resources:
+- type: compute.v1.instance
+  name: my-first-vm
+  properties:
+    zone: europe-west2-c
+    machineType: https://www.googleapis.com/compute/v1/projects/bankingapplication/zones/europe-west2-c/machineTypes/f1-micro
+    disks:
+    - deviceName: boot
+      type: PERSISTENT
+      boot: true
+      autoDelete: true
+      initializeParams:
+        sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9
+    networkInterfaces:
+    - network: https://www.googleapis.com/compute/v1/projects/bankingapplication/global/networks/default
+      accessConfigs:
+      - name: External NAT
+        Type: ONE_TO_ONE_NAT
