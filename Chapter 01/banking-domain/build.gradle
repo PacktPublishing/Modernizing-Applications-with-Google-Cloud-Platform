@@ -23,6 +23,11 @@ apply plugin: 'com.jfrog.artifactory'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
+compileJava.options.encoding = 'cp1252'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'cp1252'
+}
 
 group = 'uk.me.jasonmarston.domain'
 version = '1.0.0-SNAPSHOT'

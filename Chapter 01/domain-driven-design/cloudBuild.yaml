@@ -7,10 +7,3 @@ steps:
   - 'artifactory_password=${_ARTIFACTORY_PASSWORD}'
   - 'artifactory_user=${_ARTIFACTORY_USER}'
   dir: 'domain-driven-design'
-- name: 'gcr.io/cloud-builders/gcloud'
-  id: 'Provisioning'
-  args: ['deployment-manager', 'deployments', 'create', 'banking-deployment', '--config', 'vm.yaml']
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=${_ZONE}'
-  - 'CLOUDSDK_COMPUTE_REGION=${_REGION}'
-  dir: 'domain-driven-design'
