@@ -1,0 +1,65 @@
+buildscript {
+	repositories {
+	    maven {
+    	    url "$System.env.artifactory_contextUrl/gradle-dev"
+        	credentials {
+				username = "$System.env.artifactory_user"
+				password = "$System.env.artifactory_password"
+			}
+    	}
+	}
+	dependencies {
+		classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.11.0'
+	}
+}
+
+plugins {
+	id 'maven'
+	id 'com.jfrog.artifactory' version '4.11.0'
+    id 'java-library'
+}
+
+apply plugin: 'com.jfrog.artifactory'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+group = 'uk.me.jasonmarston.framework'
+version = '1.0.0-SNAPSHOT'
+
+// this is needed for the eclipse gradle plugin
+repositories {
+    maven {
+   	    url "$System.env.artifactory_contextUrl/gradle-dev"
+       	credentials {
+			username = "$System.env.artifactory_user"
+			password = "$System.env.artifactory_password"
+		}
+   	}
+}
+
+dependencies {
+	implementation 'com.google.firebase:firebase-admin:6.11.0'
+}
+
+artifactory {
+	contextUrl = "$System.env.artifactory_contextUrl"
+	publish {
+		repository {
+			repoKey = 'gradle-dev-local'
+			username = "$System.env.artifactory_user"
+			password = "$System.env.artifactory_password"
+		}
+		defaults {
+			publishConfigs('archives')
+			publishBuildInfo = false
+		} 
+	}
+	resolve {
+		repository {
+			repoKey = 'gradle-dev'
+			username = "$System.env.artifactory_user"
+			password = "$System.env.artifactory_password"
+		}
+	}
+}

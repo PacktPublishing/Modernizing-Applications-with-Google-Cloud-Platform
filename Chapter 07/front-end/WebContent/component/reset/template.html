@@ -1,0 +1,27 @@
+<div ng-if="$ctrl.message == null">
+	<div class="row">
+		<h1>Reset Password</h1>
+	</div>
+	<div class="row">
+		<form id="reset">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="email">Email Address</label>
+					<input data-required-error="Email Address is Required" id="email" placeholder="Enter email address" type="email" ng-model="$ctrl.email" class="form-control" required/>
+					<div class="help-block with-errors"></div>
+					<div class="text-danger" ng-bind="$ctrl.error"></div>
+				</div>
+				<button type="submit" class="btn btn-primary btn-block" ng-click="$ctrl.reset()">Reset Password</button>
+			</div>
+			<div class="col-md-4"></div>
+		</form>
+	</div>
+</div>
+<div class="row" ng-if="$ctrl.message">
+	<div class="col-md-4"></div>
+	<div class="col-md-4" align="center">
+		<div class="alert alert-info" ng-bind="$ctrl.message"></div>
+	</div>
+	<div class="col-md-4"></div>
+</div>

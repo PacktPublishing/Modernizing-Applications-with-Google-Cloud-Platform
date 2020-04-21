@@ -1,0 +1,27 @@
+<div class="row" ng-if="$ctrl.mode != 'enterNewPassword'">
+	<div class="col-md-4"></div>
+	<div class="col-md-4" align="center">
+		<div class="alert alert-info" ng-if="$ctrl.message" ng-bind="$ctrl.message"></div>
+		<div class="alert alert-danger" ng-if="$ctrl.error" ng-bind="$ctrl.error"></div>
+	</div>
+	<div class="col-md-4"></div>
+</div>
+<div class="row" ng-if="$ctrl.mode == 'enterNewPassword'">
+	<form id="change">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="newPassword">New Password</label>
+				<input pattern="{{$ctrl.strongPattern}}" data-pattern-error="Weak Password" id="newPassword" placeholder="Enter new password" type="password" ng-model="$ctrl.newPassword" class="form-control" required/>
+				<div class="help-block with-errors"></div>
+			</div>
+			<div class="form-group">
+				<label for="confirmPassword">Confirm Password</label>
+				<input data-match="#newPassword" data-match-error="Passwords do not match" id="confirmPassword" placeholder="Confirm password" type="password" ng-model="$ctrl.confirmPassword" class="form-control" required/>
+				<div class="help-block with-errors"></div>
+			</div>
+			<button type="submit" class="btn btn-primary btn-block" ng-click="$ctrl.change()">Change Password</button>
+		</div>
+		<div class="col-md-4"></div>
+	</form>
+</div>

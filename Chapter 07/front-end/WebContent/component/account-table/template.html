@@ -1,0 +1,33 @@
+<div class="row">
+	<h1>My Accounts</h1>
+</div>
+<div class="row">
+	<div class="col-md-5"></div>
+	<div class="col-md-2">
+		<form>
+			<a class="btn btn-primary btn-block" href="#!/accounts/open" role="button">Open Account</a>
+		</form>
+	</div>
+	<div class="col-md-5"></div>
+</div>
+<div class="row">&nbsp;</div>
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th class="text-right">Balance</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="account in $ctrl.accounts">
+					<td><a href="#!/accounts/{{account.id}}" ng-bind="account.name"></a></td>
+					<td class="text-right" ng-bind="account.balance | number : 2"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-md-4"></div>
+</div>

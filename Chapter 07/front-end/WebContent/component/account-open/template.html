@@ -1,0 +1,17 @@
+<div class="row">
+	<h1>Open Account</h1>
+</div>
+<div class="row">
+	<form id="openAccount">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="name">Name of Account</label>
+				<input data-required-error="Account Name is Required" id="name" placeholder="Enter account names" type="text" ng-model="$ctrl.name" class="form-control" required/>
+				<div class="help-block with-errors"></div>
+			</div>
+			<button type="submit" class="btn btn-primary btn-block" ng-click="$ctrl.openAccount()">Open Account</button>
+		</div>
+		<div class="col-md-4"></div>
+	</form>
+</div>
