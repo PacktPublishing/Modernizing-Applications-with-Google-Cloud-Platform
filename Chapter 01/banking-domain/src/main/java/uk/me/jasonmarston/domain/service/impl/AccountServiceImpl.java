@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,8 @@ public class AccountServiceImpl implements AccountService {
 		if(optional.isPresent()) {
 			final Account account = optional.get();
 			final Transaction transaction = account
-					.depositFunds(transactionDetails.getAmount());
+					.depositFunds(transactionDetails.getAmount(),
+							transactionDetails.getDescription());
 
 			accountRepository.save(account);
 
@@ -74,6 +76,11 @@ public class AccountServiceImpl implements AccountService {
 		}
 
 		return null;
+	}
+
+	@Override
+	public List<Account> getAccounts(@NotNull @Valid String ownerId) {
+		return accountRepository.findByOwnerId(ownerId);
 	}
 
 	@Override
@@ -168,16 +175,6 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public Account openAccount() {
-		final Account.Builder builder = accountBuilderFactory.create();
-		final Account account = builder
-				.withOpeningBalance(new Balance("0.00"))
-				.build();
-
-		return accountRepository.save(account);
-	}
-
-	@Override
 	public Transaction withdrawFunds(
 			@NotNull @Valid TransactionDetails transactionDetails) {
 		final Optional<Account> optional = accountRepository
@@ -185,12 +182,25 @@ public class AccountServiceImpl implements AccountService {
 		if(optional.isPresent()) {
 			final Account account = optional.get();
 			final Transaction transaction = account
-					.withdrawFunds(transactionDetails.getAmount());
+					.withdrawFunds(transactionDetails.getAmount(),
+							transactionDetails.getDescription());
 
 			accountRepository.save(account);
 
 			return transaction;
 		}
 		return null;
+	}
+
+	@Override
+	public Account openAccount(@NotNull @Valid String ownerId, @NotEmpty String name) {
+		final Account.Builder builder = accountBuilderFactory.create();
+		final Account account = builder
+				.forOwner(ownerId)
+				.withName(name)
+				.withOpeningBalance(new Balance("0.00"))
+				.build();
+
+		return accountRepository.save(account);
 	}
 }

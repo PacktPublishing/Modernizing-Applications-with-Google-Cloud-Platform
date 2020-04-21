@@ -2,6 +2,9 @@ package uk.me.jasonmarston.domain.repository;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
@@ -16,5 +19,5 @@ import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 public interface VerificationTokenRepository extends 
 		JpaRepository<VerificationToken, EntityId>,
 		JpaSpecificationExecutor<VerificationToken> {
-	Optional<VerificationToken> findByToken(final Token token);
+	Optional<VerificationToken> findByToken(@NotNull @Valid final Token token);
 }

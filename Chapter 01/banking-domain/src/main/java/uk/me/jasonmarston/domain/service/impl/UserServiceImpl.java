@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,6 +24,7 @@ import uk.me.jasonmarston.domain.repository.UserRepository;
 import uk.me.jasonmarston.domain.service.UserService;
 import uk.me.jasonmarston.domain.value.EmailAddress;
 import uk.me.jasonmarston.domain.value.Password;
+import uk.me.jasonmarston.framework.authentication.impl.Token;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 
 @Service
@@ -38,6 +40,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	@Lazy
 	private UserRepository userRepository;
+
+	@Value("${banking.initial.admin.email}")
+    private String emailString;
 
 	@Override
 	public User addAuthority(
@@ -163,6 +168,26 @@ public class UserServiceImpl implements UserService {
 		
 		user.addAuthority(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		user.enable();
+
+		return userRepository.save(user);
+	}
+
+	@Override
+	public User sync(@NotNull Token token) {
+		final Optional<User> optional = userRepository.findByUid(token.getUid());
+		User user = null;
+		if(optional.isPresent()) {
+			user = optional.get();
+			user.sync(token);
+		}
+		else {
+			user = new User(token);
+		}
+
+		user.addAuthority(new SimpleGrantedAuthority("ROLE_USER"));
+		if(user.getEmail().toString().equals(emailString)) {
+			user.addAuthority(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		}
 
 		return userRepository.save(user);
 	}

@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,6 +30,7 @@ import uk.me.jasonmarston.domain.factory.aggregate.UserBuilderFactory;
 import uk.me.jasonmarston.domain.factory.entity.AuthorityBuilderFactory;
 import uk.me.jasonmarston.domain.value.EmailAddress;
 import uk.me.jasonmarston.domain.value.Password;
+import uk.me.jasonmarston.framework.authentication.impl.Token;
 import uk.me.jasonmarston.framework.domain.aggregate.AbstractAggregate;
 import uk.me.jasonmarston.framework.domain.builder.IBuilder;
 
@@ -118,6 +120,10 @@ public class User extends AbstractAggregate implements UserDetails {
 	@Transient
 	private Set<GrantedAuthority> _authorities = 
 			new HashSet<GrantedAuthority>();
+	
+	@NotNull
+	@Column(unique = true)
+	private String uid;
 
 	private boolean enabled = false;
 
@@ -131,6 +137,17 @@ public class User extends AbstractAggregate implements UserDetails {
 
 	private User() {
 		super();
+		uid = getId().getId().toString();
+	}
+	
+	public User(Token token) {
+		this.uid = token.getUid();
+		this.email = new EmailAddress(token.getEmail());
+		this.enabled = token.isEmailVerified();
+		this.picture = token.getPicture();
+		this.password = new Password(_getBean(PasswordEncoder.class)
+				.encode(UUID.randomUUID().toString()));
+		this.locale = Locale.forLanguageTag("en-UK");
 	}
 
 	private Set<GrantedAuthority> _getAuthorities() {
@@ -225,6 +242,10 @@ public class User extends AbstractAggregate implements UserDetails {
 	public String getPicture() {
 		return picture;
 	}
+	
+	public String getUid() {
+		return uid;
+	}
 
 	@Override
 	public String getUsername() {
@@ -298,5 +319,15 @@ public class User extends AbstractAggregate implements UserDetails {
 			}
 		}
 		return true;
+	}
+
+	public void setCredentials(String credentials) {
+		this.credentials = credentials;
+	}
+	
+	public void sync(Token token) {
+		this.email = new EmailAddress(token.getEmail());
+		this.enabled = token.isEmailVerified();
+		this.picture = token.getPicture();
 	}
 }

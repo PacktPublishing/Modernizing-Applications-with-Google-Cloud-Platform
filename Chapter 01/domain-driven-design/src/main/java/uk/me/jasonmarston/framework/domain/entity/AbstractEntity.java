@@ -18,7 +18,7 @@ public abstract class AbstractEntity extends AbstractDomainObject
 	@Id
 	@JsonUnwrapped
 	@NotNull
-	private EntityId id;
+	protected EntityId id;
 
 	protected AbstractEntity() {
 		this.id = new EntityId();

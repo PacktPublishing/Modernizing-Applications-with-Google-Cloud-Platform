@@ -1,5 +1,9 @@
 package uk.me.jasonmarston.domain.entity;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -7,8 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.stereotype.Service;
@@ -28,6 +32,7 @@ public class Transaction extends AbstractEntity {
 		private Account account;
 		private Amount amount;
 		private EntityId referenceAccountId;
+		private String description;
 
 		private Builder() {
 		}
@@ -47,6 +52,7 @@ public class Transaction extends AbstractEntity {
 			transaction.type = type;
 			transaction.account = account;
 			transaction.amount = amount;
+			transaction.description = description;
 			transaction.referenceAccountId = referenceAccountId;
 
 			return transaction;
@@ -59,6 +65,11 @@ public class Transaction extends AbstractEntity {
 
 		public Builder ofType(TransactionType type) {
 			this.type = type;
+			return this;
+		}
+		
+		public Builder withDescrption(String description) {
+			this.description = description;
 			return this;
 		}
 
@@ -89,14 +100,23 @@ public class Transaction extends AbstractEntity {
 	private Account account;
 
 	@NotNull
-	@Positive
+	@Valid
 	private Amount amount;
+	
+	private String description;
+	
+	@NotNull
+	@Column(columnDefinition="TIMESTAMP")
+	private ZonedDateTime dateTime;
 
 	@AttributeOverride(name="id", column=@Column(name="referenceAccountId", columnDefinition = "CHAR(36)"))
 	private EntityId referenceAccountId;
 
 	private Transaction() {
 		super();
+		final Instant now = Instant.now();
+		final ZoneId utc = ZoneId.of("UTC");
+		dateTime = ZonedDateTime.ofInstant(now, utc);
 	}
 
 	@Override
@@ -116,6 +136,14 @@ public class Transaction extends AbstractEntity {
 
 	public Amount getAmount() {
 		return amount;
+	}
+
+	public ZonedDateTime getDateTime() {
+		return dateTime;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public EntityId getReferenceAccountId() {

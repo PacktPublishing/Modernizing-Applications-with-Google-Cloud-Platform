@@ -1,5 +1,7 @@
 package uk.me.jasonmarston.domain.details;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ public class TransactionDetails extends AbstractValueObject implements DetailsOb
 	public static class Builder implements IBuilder<TransactionDetails> {
 		private EntityId accountId;
 		private Amount amount;
+		private String description;
 
 		private Builder() {
 		}
@@ -29,6 +32,7 @@ public class TransactionDetails extends AbstractValueObject implements DetailsOb
 					new TransactionDetails();
 			transactionDetails.accountId = accountId;
 			transactionDetails.amount = amount;
+			transactionDetails.description = description;
 
 			return transactionDetails;
 		}
@@ -40,6 +44,11 @@ public class TransactionDetails extends AbstractValueObject implements DetailsOb
 
 		public Builder withAmount(final Amount amount) {
 			this.amount = amount;
+			return this;
+		}
+		
+		public Builder withDescription(final String description) {
+			this.description = description;
 			return this;
 		}
 	}
@@ -58,7 +67,11 @@ public class TransactionDetails extends AbstractValueObject implements DetailsOb
 	private EntityId accountId;
 
 	@NotNull(message = "Amount is required")
+	@Valid
 	private Amount amount;
+	
+	@NotEmpty
+	private String description;
 
 	private TransactionDetails() {
 	}
@@ -74,5 +87,9 @@ public class TransactionDetails extends AbstractValueObject implements DetailsOb
 
 	public Amount getAmount() {
 		return amount;
+	}
+	
+	public String getDescription() {
+		return description;
 	}
 }

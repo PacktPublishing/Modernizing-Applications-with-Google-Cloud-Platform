@@ -9,6 +9,7 @@ import uk.me.jasonmarston.domain.aggregate.User;
 import uk.me.jasonmarston.domain.details.RegistrationDetails;
 import uk.me.jasonmarston.domain.value.EmailAddress;
 import uk.me.jasonmarston.domain.value.Password;
+import uk.me.jasonmarston.framework.authentication.impl.Token;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 
 public interface UserService {
@@ -29,4 +30,5 @@ public interface UserService {
 			@NotNull @Valid final RegistrationDetails registrationDetails);
 	User registerAdministrator(
 			@NotNull @Valid final RegistrationDetails registrationDetails);
+	User sync(@NotNull Token token);
 }

@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Service;
@@ -28,22 +30,36 @@ import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 public class Account extends AbstractAggregate {
 	public static class Builder implements IBuilder<Account> {
 		private Balance balance;
+		private String ownerId;
+		private String name;
 
 		private Builder() {
 		}
 
 		@Override
 		public Account build() {
-			if(balance == null) {
-				throw new IllegalArgumentException("An opening balance is required");
+			if(balance == null || ownerId == null || name == null) {
+				throw new IllegalArgumentException("Invalid account");
 			}
 
 			final Account account = new Account();
 			account.balance = balance;
+			account.ownerId = ownerId;
+			account.name = name;
 
 			return account;
 		}
 
+		public Builder forOwner(String ownerId) {
+			this.ownerId = ownerId;
+			return this;
+		}
+		
+		public Builder withName(String name) {
+			this.name = name;
+			return this;
+		}
+		
 		public Builder withOpeningBalance(Balance balance) {
 			this.balance = balance;
 			return this;
@@ -61,7 +77,14 @@ public class Account extends AbstractAggregate {
 	private static final long serialVersionUID = 1L;
 
 	@NotNull
+	@Valid
 	private Balance balance;
+	
+	@NotEmpty
+	private String name;
+	
+	@NotEmpty
+	private String ownerId;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.EAGER)
 	@NotNull
@@ -77,11 +100,12 @@ public class Account extends AbstractAggregate {
 		return new String[] { "transactions" };
 	}
 
-	public Transaction depositFunds(final Amount amount) {
-		return depositFunds(amount, null);
+	public Transaction depositFunds(final Amount amount, final String description) {
+		return depositFunds(amount, description, null);
 	}
 
 	public Transaction depositFunds(final Amount amount, 
+			final String description,
 			final EntityId referenceAccountId) {
 		balance = balance.add(amount);
 
@@ -91,6 +115,7 @@ public class Account extends AbstractAggregate {
 				.againstAccount(this)
 				.ofType(TransactionType.DEPOSIT)
 				.forAmount(amount)
+				.withDescrption(description)
 				.withReferenceAccountId(referenceAccountId)
 				.build();
 
@@ -110,6 +135,14 @@ public class Account extends AbstractAggregate {
 				TransactionType.DEPOSIT.equals(transaction.getType()))
 			.collect(Collectors.toList());
 	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getOwnerId() {
+		return ownerId;
+	}
 
 	public List<Transaction> getTransactions() {
 		return transactions;
@@ -123,11 +156,12 @@ public class Account extends AbstractAggregate {
 			.collect(Collectors.toList());
 	}
 
-	public Transaction withdrawFunds(final Amount amount) {
-		return withdrawFunds(amount, null);
+	public Transaction withdrawFunds(final Amount amount, final String description) {
+		return withdrawFunds(amount, description, null);
 	}
 
 	public Transaction withdrawFunds(final Amount amount,
+			final String description,
 			final EntityId referenceAccountId) {
 		balance = balance.subtract(amount);
 
@@ -137,6 +171,7 @@ public class Account extends AbstractAggregate {
 				.againstAccount(this)
 				.ofType(TransactionType.WITHDRAWAL)
 				.forAmount(amount)
+				.withDescrption(description)
 				.withReferenceAccountId(referenceAccountId)
 				.build();
 

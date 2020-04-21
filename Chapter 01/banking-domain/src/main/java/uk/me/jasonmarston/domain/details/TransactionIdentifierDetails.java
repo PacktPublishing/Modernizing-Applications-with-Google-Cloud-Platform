@@ -2,6 +2,8 @@ package uk.me.jasonmarston.domain.details;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.stereotype.Service;
+
 import uk.me.jasonmarston.domain.factory.details.TransactionIdentifierDetailsBuilderFactory;
 import uk.me.jasonmarston.framework.domain.builder.IBuilder;
 import uk.me.jasonmarston.framework.domain.details.DetailsObject;
@@ -41,6 +43,7 @@ public class TransactionIdentifierDetails extends AbstractValueObject implements
 		}
 	}
 
+	@Service
 	public static class Factory implements TransactionIdentifierDetailsBuilderFactory {
 		@Override
 		public Builder create() {
