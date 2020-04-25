@@ -1,0 +1,43 @@
+<div ng-if="$ctrl.account && $ctrl.account.name">
+	<div class="row">
+		<h1 ng-bind="$ctrl.account.name"></h1>
+	</div>
+	<div class="row">
+		<h1 ng-bind="$ctrl.account.balance | number: 2"></h1>
+	</div>
+	<div class="row">&nbsp;</div>
+	<form id="transfer">
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="amount" ng-bind="'transfer.amount.label' | translate"></label>
+					<input min="0.01" max="999999.99" step="0.01" data-error="{{'transfer.amount.errors.range' | translate}}" data-required-error="{{'transfer.amount.errors.required' | translate}}" id="amount" placeholder="{{'transfer.amount.placeholder' | translate}}" type="number" ng-model="$ctrl.amount" class="form-control" required/>
+					<div class="help-block with-errors"></div>
+				</div>
+				<div class="form-group">
+					<label for="amount" ng-bind="'transfer.description.label' | translate"></label>
+					<input data-required-error="{{'transfer.description.errors.required' | translate}}" id="amount" placeholder="{{'transfer.description.placeholder' | translate}}" type="text" ng-model="$ctrl.description" class="form-control" required/>
+					<div class="help-block with-errors"></div>
+				</div>
+				<div class="form-group">
+					<label for="account" ng-bind="'transfer.account.label' | translate"></label>
+					<select id="account" ng-model="$ctrl.otherAccountId" class="form-control" type="text" data-select>
+						<option ng-repeat="account in $ctrl.accounts" value="{{account.id}}" ng-bind="account.name" ng-if="account.id != $ctrl.accountId"></option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-2">
+				<button type="submit" class="btn btn-primary btn-block" ng-click="$ctrl.withdraw()" ng-bind="'transfer.funds' | translate"></button>
+			</div>
+			<div class="col-md-2">
+				<button type="button" class="btn btn-primary btn-block" ng-click="$ctrl.cancel()" ng-bind="'transfer.cancel' | translate"></button>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+	</form>
+</div>

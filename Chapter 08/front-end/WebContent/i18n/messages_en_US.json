@@ -1,0 +1,39 @@
+{
+	"title": "Internet Bank (US)",
+	"home": "Home",
+	"profile": "Profile",
+	"changePassword": "Change Password",
+	"signout": "Sign Out",
+	"DEPOSIT": "Deposit",
+	"WITHDRAWAL": "Withdrawal",
+	"signin": {
+		"submit": "Sign In (US)"
+	},
+	"locale": {
+		"en_UK": "UK English",
+		"en_US": "US English",
+		"en_CA": "Canadian English"
+	},
+	"accountList": {
+		"heading": "My Accounts",
+		"openAccount": "Open Account",
+		"name": "Name",
+		"balance": "Balance"
+	},
+	"account": {
+		"withdraw": "Withdraw",
+		"deposit": "Deposit",
+		"transfer": "Transfer",
+		"heading": "Recent Transactions",
+		"date": "Date",
+		"description": "Description",
+		"type": "Type",
+		"amount": "Amount"
+	},
+	"withdraw": {
+		"funds": "Withdraw Funds!"
+	},
+	"deposit": {
+		"funds": "Deposit Funds!"
+	}
+}
