@@ -41,7 +41,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="transaction in $ctrl.transactions | orderBy:'dateTime':'descending'" ng-class="$ctrl.css_class(transaction.correction)">
+					<tr ng-repeat="transaction in $ctrl.transactions | orderBy:'dateTime':'descending'" ng-class="$ctrl.css_class(transaction)">
 						<td ng-bind="transaction.dateTime | date:'dd/MM/yyyy hh:mm:ss'""></td>
 						<td><a href="#!/accounts/{{$ctrl.accountId}}/transactions/{{transaction.id}}" ng-bind="transaction.description"></a></td>
 						<td ng-bind="transaction.type | translate"></td>

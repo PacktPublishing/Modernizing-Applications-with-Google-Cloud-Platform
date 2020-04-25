@@ -10,9 +10,12 @@ angular.module('component.accountDetail').component('accountDetail', {
 			});
 		});
 
-		self.css_class = function(flag) {
-			if(flag == true) {
+		self.css_class = function(transaction) {
+			if(transaction.correction == true) {
 				return "warning";
+			}
+			if(self.accountId != transaction.referenceAccountId) {
+				return "info";
 			}
 			return "";
 		};

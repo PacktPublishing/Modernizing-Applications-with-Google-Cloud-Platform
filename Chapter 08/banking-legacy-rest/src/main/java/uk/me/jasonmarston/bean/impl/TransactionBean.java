@@ -2,6 +2,7 @@ package uk.me.jasonmarston.bean.impl;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 import uk.me.jasonmarston.domain.entity.Transaction;
 
@@ -11,6 +12,7 @@ public class TransactionBean {
 	private String type;
 	private BigDecimal amount;
 	private boolean isCorrection;
+	private UUID referenceAccountId;
 
 	public TransactionBean() {
 	}
@@ -21,6 +23,7 @@ public class TransactionBean {
 		type = transaction.getType().name();
 		amount = transaction.getAmount().getAmount();
 		isCorrection = transaction.isCorrection();
+		referenceAccountId = transaction.getReferenceAccountId().getId();
 	}
 
 	public ZonedDateTime getDateTime() {
@@ -61,5 +64,13 @@ public class TransactionBean {
 
 	public void setCorrection(boolean isCorrection) {
 		this.isCorrection = isCorrection;
+	}
+
+	public UUID getReferenceAccountId() {
+		return referenceAccountId;
+	}
+
+	public void setReferenceAccountId(UUID referenceAccountId) {
+		this.referenceAccountId = referenceAccountId;
 	}
 }
