@@ -113,7 +113,7 @@ public class Transaction extends AbstractEntity {
 	private TransactionType type;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@AttributeOverride(name="id", column=@Column(name="ownerAccountId", nullable = false))
+	@AttributeOverride(name="id", column=@Column(name="ownerAccountId", columnDefinition = "CHAR(36)", nullable = false))
 	@NotNull
 	private Account account;
 
@@ -123,7 +123,7 @@ public class Transaction extends AbstractEntity {
 	
 	private String description;
 
-	@AttributeOverride(name="id", column=@Column(name="journal_code", nullable = false))
+	@AttributeOverride(name="id", column=@Column(name="journal_code", columnDefinition = "CHAR(36)", nullable = false))
 	@NotNull
 	private EntityId journalCode;
 	
@@ -131,7 +131,7 @@ public class Transaction extends AbstractEntity {
 	@Column(columnDefinition="TIMESTAMP", nullable = false)
 	private ZonedDateTime dateTime;
 
-	@AttributeOverride(name="id", column=@Column(name="referenceAccountId", nullable = false))
+	@AttributeOverride(name="id", column=@Column(name="referenceAccountId", columnDefinition = "CHAR(36)", nullable = false))
 	@NotNull
 	private EntityId referenceAccountId;
 

@@ -97,7 +97,7 @@ public class User extends AbstractAggregate implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	@NotNull
-	@AttributeOverride(name="email", column=@Column(name="email", unique = true, nullable = false))
+	@AttributeOverride(name="email", column=@Column(name="email", columnDefinition = "CHAR(250)", unique = true, nullable = false))
 	private EmailAddress email;
 
 	@NotNull

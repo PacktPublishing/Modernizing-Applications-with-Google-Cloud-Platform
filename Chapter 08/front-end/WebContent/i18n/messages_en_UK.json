@@ -191,7 +191,10 @@
 		"funds": "Transfer Funds",
 		"cancel": "Cancel",
 		"account": {
-			"label": "Destination Account"
+			"label": "Destination Account",
+			"errors": {
+				"select": "Destination Account is Required"
+			}
 		},
 		"amount": {
 			"label": "Amount",
