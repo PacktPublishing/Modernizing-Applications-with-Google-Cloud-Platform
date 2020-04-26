@@ -4,3 +4,5 @@ bin
 build
 .classpath
 .project
+WebContent/META-INF
+WebContent/WEB-INF
