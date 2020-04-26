@@ -14,8 +14,7 @@ angular.module('component.signup').component('signup', {
 		self.signUp = function() {
 			self.authenticating = true;
 
-			Auth.$createUserWithEmailAndPassword(self.email, self.password)
-			.then(function(user) {
+			Auth.$createUserWithEmailAndPassword(self.email, self.password).then(function(user) {
 				self.authenticating = false;
 			})
 			.catch(function() {
