@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import uk.me.jasonmarston.domain.aggregate.Account;
 import uk.me.jasonmarston.domain.details.TransactionDetails;
 import uk.me.jasonmarston.domain.details.TransactionIdentifierDetails;
+import uk.me.jasonmarston.domain.details.TransferIdentifierDetails;
 import uk.me.jasonmarston.domain.entity.Transaction;
 import uk.me.jasonmarston.domain.value.Balance;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
@@ -28,6 +29,9 @@ public interface AccountService {
 					transactionIdentifierDetails);
 	List<Transaction> getTransactions(
 			@NotNull @Valid final EntityId accountId);
+	Transaction getTransfer(
+			@NotNull @Valid final TransferIdentifierDetails
+					transferIdentifierDetails);
 	Transaction getWithdrawal(
 			@NotNull @Valid final TransactionIdentifierDetails
 					transactionIdentifierDetails);

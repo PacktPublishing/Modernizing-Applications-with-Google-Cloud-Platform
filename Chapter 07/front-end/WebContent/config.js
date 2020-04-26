@@ -9,30 +9,25 @@ angular.module('app').
 ]);
 
 angular.module('app').
-	config(['$routeProvider', function config($routeProvider) {
+	config(['$routeProvider', '$translateProvider', function config($routeProvider, $translateProvider) {
 		$routeProvider.
+		when('/reset', {
+			template: '<reset></reset>'
+		}).
 		when('/', {
 			template: '<signin></signin>'
 		}).
 		when('/signup', {
 			template: '<signup></signup>'
 		}).
-		when('/reset', {
-			template: '<reset></reset>'
+		when('/__/auth/action', {
+			template: '<authenticate></authenticate>'
 		}).
 		when('/verify', {
 			template: '<verify-email></verify-email>',
 			resolve: {
 				"currentAuth": ["Auth", function(Auth) {
 					return Auth.$requireSignIn();
-				}]
-			}
-		}).
-		when('/change', {
-			template: '<change-password></change-password>',
-			resolve: {
-				"currentAuth": ["Auth", function(Auth) {
-					return Auth.$requireSignIn(true);
 				}]
 			}
 		}).
@@ -68,6 +63,14 @@ angular.module('app').
 				}]
 			}
 		}).
+		when('/accounts/:accountId/transfer', {
+			template: '<account-transfer></account-transfer>',
+			resolve: {
+				"currentAuth": ["Auth", function(Auth) {
+					return Auth.$requireSignIn(true);
+				}]
+			}
+		}).
 		when('/accounts/:accountId/withdraw', {
 			template: '<account-withdraw></account-withdraw>',
 			resolve: {
@@ -76,9 +79,27 @@ angular.module('app').
 				}]
 			}
 		}).
-		when('/__/auth/action', { //?mode=:action&oobCode=:code', {
-			template: '<authenticate></authenticate>'
+		when('/change', {
+			template: '<change-password></change-password>',
+			resolve: {
+				"currentAuth": ["Auth", function(Auth) {
+					return Auth.$requireSignIn(true);
+				}]
+			}
 		}).
 		otherwise('/');
+
+		$translateProvider.useSanitizeValueStrategy('sanitize');
+		$translateProvider.useStaticFilesLoader({
+			prefix: 'i18n/messages_',
+			suffix: '.json'
+		});
+		$translateProvider.registerAvailableLanguageKeys(['en', 'en_UK', 'en_CA', 'en_US'], {
+	        'en_*': 'en',
+	        '*': 'en'
+	     });
+	    $translateProvider.preferredLanguage("en_UK");
+	    $translateProvider.fallbackLanguage("en");
+	    $translateProvider.useLocalStorage();
 	}
 ]);

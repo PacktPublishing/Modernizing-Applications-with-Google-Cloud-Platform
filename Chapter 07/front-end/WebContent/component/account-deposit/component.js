@@ -1,6 +1,6 @@
 angular.module('component.accountDeposit').component('accountDeposit', {
 	templateUrl: 'component/account-deposit/template.html',
-	controller: ['Auth', '$location', '$timeout', '$routeParams', '$rootScope', 'Account', function AccountDetailController(Auth, $location, $timeout, $routeParams, $rootScope, Account) {
+	controller: ['Auth', '$location', '$timeout', '$routeParams', '$rootScope', 'Account', function AccountDepositController(Auth, $location, $timeout, $routeParams, $rootScope, Account) {
 		var self = this;
 
 		$timeout(function() {
@@ -11,18 +11,19 @@ angular.module('component.accountDeposit').component('accountDeposit', {
 		self.accountId = $routeParams.accountId;
 
 		Auth.$getAuth().getIdToken().then(function(token) {
-			Account.setToken(token);
-			self.account = Account.getUnique(self.accountId);
-			$rootScope.$apply();
+			self.account = Account.setToken(token).getUnique(self.accountId);
 		})
 		
 		self.deposit = function() {
 			Auth.$getAuth().getIdToken().then(function(token) {
-				Account.setToken(token);
-				self.account = Account.depositFunds(self.accountId, { amount: self.amount, description: self.description });
-				$location.path('/accounts/' + self.accountId);
-				$rootScope.$apply();
+				self.account = Account.setToken(token).depositFunds(self.accountId, { amount: self.amount, description: self.description }, function() {
+					$location.path('/accounts/' + self.accountId);
+				});
 			})
+		}
+		
+		self.cancel = function() {
+			$location.path('/accounts/' + self.accountId);
 		}
 	}]
 });

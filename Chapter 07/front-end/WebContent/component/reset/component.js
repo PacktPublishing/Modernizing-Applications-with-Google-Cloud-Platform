@@ -1,6 +1,6 @@
 angular.module('component.reset').component('reset', {
 	templateUrl: 'component/reset/template.html',
-	controller: ['Auth', '$location', '$timeout', '$rootScope', function ResetController(Auth, $location, $timeout, $rootScope) {
+	controller: ['Auth', '$location', '$timeout', '$rootScope', '$translate', function ResetController(Auth, $location, $timeout, $rootScope, $translate) {
 		var self = this;
 		
 		$timeout(function() {
@@ -10,12 +10,18 @@ angular.module('component.reset').component('reset', {
 
 		self.reset = function() {
 			Auth.$sendPasswordResetEmail(self.email).then(function() {
-				self.message = "Password Reset Email Sent"
-				$rootScope.$apply();
+				$translate('reset.message').then(function (translation) {
+					self.message = translation;
+				});
 			}).catch(function() {
-				self.error = "Error Sending Password Reset Email"
-				$rootScope.$apply();
+				$translate('reset.error').then(function (translation) {
+					self.error = translation;
+				});
 			});
+		}
+		
+		self.cancel = function() {
+			$location.path('/');
 		}
 	}]
 })

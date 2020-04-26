@@ -1,6 +1,6 @@
 angular.module('component.changePassword').component('changePassword', {
 	templateUrl: 'component/change/template.html',
-	controller: ['Auth', '$location', '$timeout', '$rootScope', function ChangePasswordController(Auth, $location, $timeout, $rootScope) {
+	controller: ['Auth', '$location', '$timeout', '$rootScope', '$translate', '$window', function ChangePasswordController(Auth, $location, $timeout, $rootScope, $translate, $window) {
 		var self = this;
 		self.strongPattern = "^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!'\"@#\\$%\\^&\\*\\(\\)\\-=_\\+\\[\\]\\{\\},.\\/\\|<>\\?`¬¦]).{8,})";
 		
@@ -21,13 +21,21 @@ angular.module('component.changePassword').component('changePassword', {
 					$location.path('/accounts');
 					$rootScope.$apply();
 				}).catch(function() {
-					self.currentPasswordError = "Something went wrong";
-					$rootScope.$apply();
+					$translate('change.error.general').then(function (translation) {
+						self.currentPasswordError = translation;
+						$rootScope.$apply();
+					});
 				})
 			}).catch(function() {
-				self.currentPasswordError = "Invalid credentials";
-				$rootScope.$apply();
+				$translate('change.error.credentials').then(function (translation) {
+					self.currentPasswordError = translation;
+					$rootScope.$apply();
+				});
 			});
 		};
+		
+		self.cancel = function() {
+			$window.history.back();
+		}
 	}]
 })

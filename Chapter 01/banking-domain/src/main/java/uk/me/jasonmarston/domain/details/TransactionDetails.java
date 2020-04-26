@@ -18,6 +18,9 @@ public class TransactionDetails extends AbstractValueObject implements DetailsOb
 		private EntityId accountId;
 		private Amount amount;
 		private String description;
+		private EntityId referenceAccountId;
+		private EntityId journalCode;
+		private boolean isCorrection;
 
 		private Builder() {
 		}
@@ -33,6 +36,15 @@ public class TransactionDetails extends AbstractValueObject implements DetailsOb
 			transactionDetails.accountId = accountId;
 			transactionDetails.amount = amount;
 			transactionDetails.description = description;
+			transactionDetails.referenceAccountId = referenceAccountId;
+			if(referenceAccountId == null) {
+				transactionDetails.referenceAccountId = accountId;
+			}
+			transactionDetails.journalCode = journalCode;
+			if(journalCode == null) {
+				transactionDetails.journalCode = new EntityId();
+			}
+			transactionDetails.isCorrection = isCorrection;
 
 			return transactionDetails;
 		}
@@ -49,6 +61,21 @@ public class TransactionDetails extends AbstractValueObject implements DetailsOb
 		
 		public Builder withDescription(final String description) {
 			this.description = description;
+			return this;
+		}
+		
+		public Builder withReferenceAccountId(final EntityId referenceAccountId) {
+			this.referenceAccountId = referenceAccountId;
+			return this;
+		}
+		
+		public Builder withJournalCode(final EntityId journalCode) {
+			this.journalCode = journalCode;
+			return this;
+		}
+		
+		public Builder asCorrection(final boolean isCorrection) {
+			this.isCorrection = isCorrection;
 			return this;
 		}
 	}
@@ -72,6 +99,10 @@ public class TransactionDetails extends AbstractValueObject implements DetailsOb
 	
 	@NotEmpty
 	private String description;
+	
+	private EntityId referenceAccountId;
+	private EntityId journalCode;
+	private boolean isCorrection;
 
 	private TransactionDetails() {
 	}
@@ -91,5 +122,17 @@ public class TransactionDetails extends AbstractValueObject implements DetailsOb
 	
 	public String getDescription() {
 		return description;
+	}
+
+	public EntityId getReferenceAccountId() {
+		return referenceAccountId;
+	}
+	
+	public EntityId getJournalCode() {
+		return journalCode;
+	}
+	
+	public boolean isCorrection() {
+		return isCorrection;
 	}
 }

@@ -1,1 +1,1 @@
-angular.module('component.signin', ['ngCookies']);
+angular.module('component.signin', []);

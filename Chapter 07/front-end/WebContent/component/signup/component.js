@@ -1,6 +1,6 @@
 angular.module('component.signup').component('signup', {
 	templateUrl: 'component/signup/template.html',
-	controller: ['Auth', '$location', '$timeout', "$rootScope", function SignupController(Auth, $location, $timeout, $rootScope) {
+	controller: ['Auth', '$location', '$timeout', "$rootScope", '$translate', function SignupController(Auth, $location, $timeout, $rootScope, $translate) {
 		var self = this;
 		self.authenticating = false;
 
@@ -15,16 +15,19 @@ angular.module('component.signup').component('signup', {
 			self.authenticating = true;
 
 			Auth.$createUserWithEmailAndPassword(self.email, self.password)
-			.then(function() {
+			.then(function(user) {
 				self.authenticating = false;
-				$location.path('/verify');
-				$rootScope.$apply();
 			})
 			.catch(function() {
 				self.authenticating = false;
-				self.userError = "Unable to Register this User";
-				$rootScope.$apply();
+				$translate('signup.error').then(function (translation) {
+					self.userError = translation;
+				});
 			});
+		}
+		
+		self.cancel = function() {
+			$location.path('/');
 		}
 	}]
 })

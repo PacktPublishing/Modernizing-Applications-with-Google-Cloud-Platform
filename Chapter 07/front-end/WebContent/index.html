@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
     		
-		<title>Internet Bank</title>
+		<title ng-bind="'title' | translate"></title>
 		
 		<link rel = "stylesheet" type = "text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
 
@@ -15,6 +15,11 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-animate.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-touch.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-cookies.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.7.9/angular-sanitize.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.18.2/angular-translate.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate-loader-static-files/2.18.2/angular-translate-loader-static-files.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate-storage-cookie/2.18.2/angular-translate-storage-cookie.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate-storage-local/2.18.2/angular-translate-storage-local.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
@@ -36,6 +41,8 @@
 		<script src="module.js"></script>
 		<script src="config.js"></script>
 
+		<script src="controller/locale/module.js"></script>
+		<script src="controller/locale/controller.js"></script>
 		<script src="controller/signout/controller.js"></script>
 
 		<script src="component/auth/module.js"></script>
@@ -59,30 +66,42 @@
 		<script src="component/account-open/component.js"></script>
 		<script src="component/account-table/module.js"></script>
 		<script src="component/account-table/component.js"></script>
+		<script src="component/account-transfer/module.js"></script>
+		<script src="component/account-transfer/component.js"></script>
 		<script src="component/account-withdraw/module.js"></script>
 		<script src="component/account-withdraw/component.js"></script>
 
 		<script src="service/account/module.js"></script>
 		<script src="service/account/service.js"></script>
+		<script src="service/user/module.js"></script>
+		<script src="service/user/service.js"></script>
 	</head>
 	<body>
 		<nav class="navbar navbar-default">
   			<div class="container-fluid">
     			<div class="navbar-header">
-      				<a class="navbar-brand" href="#!/accounts">Internet Bank</a>
+      				<a class="navbar-brand" href="#!/accounts" ng-bind="'title' | translate"></a>
     			</div>
     			<ul class="nav navbar-nav">
-      				<li class="active"><a href="#!/accounts">Home</a></li>
+      				<li class="active"><a href="#!/accounts" ng-bind="'home' | translate"></a></li>
       			</ul>
       			<ul class="nav navbar-nav pull-right" ng-controller="signout">
-					<li class="nav-item dropdown" ng-hide="auth.$getAuth() == null">
-				        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
-       					<ul class="dropdown-menu pull-right" aria-labelledby="navbarDropdown" role="menu">
+      				<li clas="nav-item dropdown" ng-controller="locale" ng-hide="user != null">
+      					<a class="nav-link dropdown-toggle" id="localeDropdown" role="button" data-toggle="dropdown" aria-haspopul="true" aria-expanded="false">Locale</a>
+      					<ul class="dropdown-menu pull-right" aria-lablledby="localseDropdown" role="menu">
+      						<li class="dropdown-item"><a class="dropdown-item" ng-click="changeLocale('en_UK')" ng-bind="'locale.en_UK' | translate"></a></li>
+      						<li class="dropdown-item"><a class="dropdown-item" ng-click="changeLocale('en_US')" ng-bind="'locale.en_US' | translate"></a></li>
+      						<li class="dropdown-item"><a class="dropdown-item" ng-click="changeLocale('en_CA')" ng-bind="'locale.en_CA' | translate"></a></li>
+      					</ul>
+      				</li>
+					<li class="nav-item dropdown" ng-hide="user == null">
+				        <a class="nav-link dropdown-toggle" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-bind="'profile' | translate"></a>
+       					<ul class="dropdown-menu pull-right" aria-labelledby="localeDropdown" role="menu">
 							<li class="dropdown-header" ng-bind="user.email"></li>
 							<li class="divider"></li>
-							<li><a class="dropdown-item" href="#!/change">Change Password</a></li>
+							<li><a class="dropdown-item" href="#!/change" ng-bind="'changePassword' | translate"></a></li>
 							<li class="divider"></li>
-		      				<li><a class="dropdown-item" href="#" ng-click="signOut()">Sign Out</a></li>
+		      				<li><a class="dropdown-item" ng-click="signOut()" ng-bind="'signout' | translate"></a></li>
 						</ul>
 					</li>
     			</ul>

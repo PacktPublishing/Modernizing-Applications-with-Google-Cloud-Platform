@@ -60,12 +60,12 @@ public class VerificationToken extends AbstractAggregate {
 	@NotNull
 	private Token token;
 
-	@AttributeOverride(name="id", column=@Column(name="userId", columnDefinition = "CHAR(36)"))
+	@AttributeOverride(name="id", column=@Column(name="userId", nullable = false))
 	@NotNull
 	private EntityId userId;
 	
 	@NotNull
-	@Column(columnDefinition="TIMESTAMP")
+	@Column(columnDefinition="TIMESTAMP", nullable = false)
 	private ZonedDateTime expiryDate;
 
 	private VerificationToken() {

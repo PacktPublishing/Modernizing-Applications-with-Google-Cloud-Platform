@@ -10,12 +10,12 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
@@ -34,8 +34,7 @@ import uk.me.jasonmarston.framework.authentication.impl.Token;
 import uk.me.jasonmarston.framework.domain.aggregate.AbstractAggregate;
 import uk.me.jasonmarston.framework.domain.builder.IBuilder;
 
-@Entity
-@Table(name = "USER_PROFILES")
+@Entity(name = "USER_PROFILES")
 public class User extends AbstractAggregate implements UserDetails {
 	public static class Builder implements IBuilder<User> {
 		private EmailAddress email;
@@ -98,11 +97,11 @@ public class User extends AbstractAggregate implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	@NotNull
-	@Column(unique = true)
+	@AttributeOverride(name="email", column=@Column(name="email", columnDefinition = "CHAR(250)", unique = true, nullable = false))
 	private EmailAddress email;
 
 	@NotNull
-	@Column(columnDefinition = "VARCHAR(42)")
+	@Column(columnDefinition = "VARCHAR(42)", nullable = false)
 	private Locale locale;
 
 	private String picture;
@@ -111,6 +110,7 @@ public class User extends AbstractAggregate implements UserDetails {
 	private String credentials;
 
 	@NotNull
+	@Column(nullable = false)
 	private Password password;
 
 	@NotNull
@@ -122,17 +122,18 @@ public class User extends AbstractAggregate implements UserDetails {
 			new HashSet<GrantedAuthority>();
 	
 	@NotNull
-	@Column(unique = true)
+	@Column(columnDefinition = "VARCHAR(100)", unique = true, nullable = false)
 	private String uid;
 
 	private boolean enabled = false;
 
-	@Column(columnDefinition="TIMESTAMP")
+	@Column(columnDefinition="TIMESTAMP", nullable = false)
 	private ZonedDateTime lastLogin = _getTestDateTime();
 
-	@Column(columnDefinition="TIMESTAMP")
+	@Column(columnDefinition="TIMESTAMP", nullable = false)
 	private ZonedDateTime lastLoginFailure = _getTestDateTime();
 
+	@Column(nullable = false)
 	private int failedLogins = 0;
 
 	private User() {

@@ -4,9 +4,9 @@ import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 
-import uk.me.jasonmarston.bean.AccountNameBean;
-import uk.me.jasonmarston.bean.DepositBean;
-import uk.me.jasonmarston.bean.WithdrawalBean;
+import uk.me.jasonmarston.bean.impl.AccountNameBean;
+import uk.me.jasonmarston.bean.impl.DepositBean;
+import uk.me.jasonmarston.bean.impl.WithdrawalBean;
 import uk.me.jasonmarston.domain.aggregate.User;
 
 public interface AccountController {

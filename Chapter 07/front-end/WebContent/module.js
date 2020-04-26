@@ -1,5 +1,8 @@
 var app = angular.module('app', [
 	'ngRoute',
+	'ngCookies',
+	'ngSanitize',
+	'pascalprecht.translate',
 	'ui.bootstrap',
 	'firebase',
 
@@ -7,13 +10,17 @@ var app = angular.module('app', [
 	'component.accountDetail',
 	'component.accountOpen',
 	'component.accountTable',
+	'component.accountTransfer',
 	'component.accountWithdraw',
+
 	'component.authenticate',
 	'component.changePassword',
 	'component.signin',
 	'component.signup',
 	'component.reset',
-	'component.verifyEmail'
+	'component.verifyEmail',
+	
+	'controller.locale'
 ]);
 
 app.factory("Auth", ["$firebaseAuth", 

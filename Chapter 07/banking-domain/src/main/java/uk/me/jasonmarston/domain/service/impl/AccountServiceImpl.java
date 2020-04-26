@@ -19,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import uk.me.jasonmarston.domain.aggregate.Account;
 import uk.me.jasonmarston.domain.details.TransactionDetails;
 import uk.me.jasonmarston.domain.details.TransactionIdentifierDetails;
+import uk.me.jasonmarston.domain.details.TransferIdentifierDetails;
 import uk.me.jasonmarston.domain.entity.Transaction;
 import uk.me.jasonmarston.domain.factory.aggregate.AccountBuilderFactory;
 import uk.me.jasonmarston.domain.repository.AccountRepository;
@@ -58,7 +59,9 @@ public class AccountServiceImpl implements AccountService {
 			final Account account = optional.get();
 			final Transaction transaction = account
 					.depositFunds(transactionDetails.getAmount(),
-							transactionDetails.getDescription());
+							transactionDetails.getDescription(),
+							transactionDetails.getReferenceAccountId(),
+							transactionDetails.isCorrection());
 
 			accountRepository.save(account);
 
@@ -148,6 +151,22 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
+	public Transaction getTransfer(
+			@NotNull @Valid final TransferIdentifierDetails
+					transferIdentifierDetails) {
+		final Optional<Transaction> optional = transactionRepository
+				.findByAccountIdAndJournalCodeAndIsCorrection(
+						transferIdentifierDetails.getAccountId(),
+						transferIdentifierDetails.getJournalCode(),
+						transferIdentifierDetails.isCorrection());
+		if(optional.isPresent()) {
+			return optional.get();
+		}
+
+		return null;
+	}
+
+	@Override
 	public Transaction getWithdrawal(
 			@NotNull @Valid final TransactionIdentifierDetails
 					transactionIdentifierDetails) {
@@ -183,7 +202,8 @@ public class AccountServiceImpl implements AccountService {
 			final Account account = optional.get();
 			final Transaction transaction = account
 					.withdrawFunds(transactionDetails.getAmount(),
-							transactionDetails.getDescription());
+							transactionDetails.getDescription(),
+							transactionDetails.getReferenceAccountId());
 
 			accountRepository.save(account);
 

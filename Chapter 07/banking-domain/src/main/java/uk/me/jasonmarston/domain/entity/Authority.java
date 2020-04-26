@@ -58,7 +58,7 @@ public class Authority extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@AttributeOverride(name="id", column=@Column(name="userId"))
+	@AttributeOverride(name="id", column=@Column(name="userId", nullable = false))
 	@NotNull
 	private User user;
 

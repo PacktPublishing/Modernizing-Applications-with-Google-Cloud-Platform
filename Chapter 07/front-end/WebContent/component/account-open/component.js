@@ -10,14 +10,17 @@ angular.module('component.accountOpen').component('accountOpen', {
 		
 		self.openAccount = function() {
 			Auth.$getAuth().getIdToken().then(function(token) {
-				Account.setToken(token);
-				Account.openAccount({ name: self.name }, function(result) {
+				Account.setToken(token).openAccount({ name: self.name }, function(result) {
 					self.message = result;
 					$location.path("/accounts");
 				}, function(error) {
-					self.message = result;
+					self.message = error;
 				});
 			})
+		}
+		
+		self.cancel = function() {
+			$location.path('/accounts');
 		}
 	}]
 });

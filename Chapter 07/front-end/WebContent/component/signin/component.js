@@ -1,6 +1,6 @@
 angular.module('component.signin').component('signin', {
 	templateUrl: 'component/signin/template.html',
-	controller: ['Auth', '$location', '$cookies', '$timeout', '$rootScope', function SigninController(Auth, $location, $cookies, $timeout, $rootScope) {
+	controller: ['Auth', '$location', '$cookies', '$timeout', '$rootScope', '$translate', function SigninController(Auth, $location, $cookies, $timeout, $rootScope, $translate) {
 		var self = this;
 		
 		$timeout(function() {
@@ -18,21 +18,15 @@ angular.module('component.signin').component('signin', {
 		Auth.$onAuthStateChanged(function(firebaseUser) {
 			if(firebaseUser) {
 				$cookies.remove('authenticating');
-				if(firebaseUser.emailVerified == true) {
-					$location.path('/accounts');
-				}
-				else {
-					$location.path('/verify');
-				}
 			}
 		});
 
 		self.signIn = function() {
 			$cookies.put('authenticating', true);
-			Auth.$signInWithEmailAndPassword(self.email, self.password).then(function() {
-				// do nothing
-			}).catch(function() {
-				self.error = "Invalid credentials";
+			Auth.$signInWithEmailAndPassword(self.email, self.password).catch(function() {
+				$translate('signin.error').then(function (translation) {
+					self.error = translation;
+				});
 			});
 		}
 	}]

@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -25,6 +27,7 @@ import uk.me.jasonmarston.framework.domain.builder.IBuilder;
 import uk.me.jasonmarston.framework.domain.entity.AbstractEntity;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 
+@Table(name = "TRANSACTIONS", uniqueConstraints=@UniqueConstraint(columnNames={"account_id", "journal_code", "is_correction"}))
 @Entity(name = "TRANSACTIONS")
 public class Transaction extends AbstractEntity {
 	public static class Builder implements IBuilder<Transaction> {
@@ -33,6 +36,8 @@ public class Transaction extends AbstractEntity {
 		private Amount amount;
 		private EntityId referenceAccountId;
 		private String description;
+		private EntityId journalCode;
+		private boolean isCorrection = false;
 
 		private Builder() {
 		}
@@ -53,7 +58,15 @@ public class Transaction extends AbstractEntity {
 			transaction.account = account;
 			transaction.amount = amount;
 			transaction.description = description;
+			transaction.journalCode = journalCode;
+			if(journalCode == null) {
+				transaction.journalCode = new EntityId();
+			}
 			transaction.referenceAccountId = referenceAccountId;
+			if(referenceAccountId == null) {
+				transaction.referenceAccountId = account.getId();
+			}
+			transaction.isCorrection = isCorrection;
 
 			return transaction;
 		}
@@ -78,6 +91,11 @@ public class Transaction extends AbstractEntity {
 			this.referenceAccountId = referenceAccountId;
 			return this;
 		}
+		
+		public Builder asCorrection(final boolean isCorrection) {
+			this.isCorrection = isCorrection;
+			return this;
+		}
 	}
 
 	@Service
@@ -95,7 +113,7 @@ public class Transaction extends AbstractEntity {
 	private TransactionType type;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@AttributeOverride(name="id", column=@Column(name="ownerAccountId"))
+	@AttributeOverride(name="id", column=@Column(name="ownerAccountId", columnDefinition = "CHAR(36)", nullable = false))
 	@NotNull
 	private Account account;
 
@@ -104,19 +122,28 @@ public class Transaction extends AbstractEntity {
 	private Amount amount;
 	
 	private String description;
+
+	@AttributeOverride(name="id", column=@Column(name="journal_code", columnDefinition = "CHAR(36)", nullable = false))
+	@NotNull
+	private EntityId journalCode;
 	
 	@NotNull
-	@Column(columnDefinition="TIMESTAMP")
+	@Column(columnDefinition="TIMESTAMP", nullable = false)
 	private ZonedDateTime dateTime;
 
-	@AttributeOverride(name="id", column=@Column(name="referenceAccountId", columnDefinition = "CHAR(36)"))
+	@AttributeOverride(name="id", column=@Column(name="referenceAccountId", columnDefinition = "CHAR(36)", nullable = false))
+	@NotNull
 	private EntityId referenceAccountId;
+
+	@Column(name="is_correction", nullable = false)
+	private boolean isCorrection;
 
 	private Transaction() {
 		super();
 		final Instant now = Instant.now();
 		final ZoneId utc = ZoneId.of("UTC");
 		dateTime = ZonedDateTime.ofInstant(now, utc);
+		isCorrection = false;
 	}
 
 	@Override
@@ -152,5 +179,13 @@ public class Transaction extends AbstractEntity {
 
 	public TransactionType getType() {
 		return type;
+	}
+
+	public EntityId getJournalCode() {
+		return journalCode;
+	}
+	
+	public boolean isCorrection() {
+		return isCorrection;
 	}
 }

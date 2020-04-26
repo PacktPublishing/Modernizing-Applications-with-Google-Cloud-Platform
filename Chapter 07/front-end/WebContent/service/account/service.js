@@ -5,6 +5,7 @@ angular.module('service.account').
 		var withdrawal = null;
 		var deposit = null;
 		var transaction = null;
+		var self = this;
 		this.setToken = function(newToken) {
 			if(token !== newToken) {
 				token = newToken;
@@ -71,6 +72,7 @@ angular.module('service.account').
 					}
 				});
 			};
+			return self;
 		};
 
 		this.depositFunds = function(accountId, transaction, success, error) {

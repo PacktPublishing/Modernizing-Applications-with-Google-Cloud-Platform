@@ -1,6 +1,6 @@
 angular.module('component.authenticate').component('authenticate', {
 	templateUrl: 'component/auth/template.html',
-	controller: ['Auth', '$location', '$timeout', '$rootScope', function AuthenticateController(Auth, $location, $timeout, $rootScope) {
+	controller: ['Auth', '$location', '$timeout', '$rootScope', '$transalate', function AuthenticateController(Auth, $location, $timeout, $rootScope, $translate) {
 		var self = this;
 		self.mode = $location.search().mode;
 		self.code = $location.search().oobCode;
@@ -13,11 +13,15 @@ angular.module('component.authenticate').component('authenticate', {
 		switch (self.mode) {
 			case "verifyEmail":
 				extraAuth.applyActionCode(self.code).then(function() {
-					self.message = "Email Verified, you may now login";
-					$rootScope.$apply();
+					$translate('auth.messages.verificaion').then(function (translation) {
+						self.message = translation;
+						$rootScope.$apply();
+					});
 				}).catch(function() {
-					self.error = "Invalid or Expired Verification Link";
-					$rootScope.$apply();
+					$translate('auth.errors.verificaion').then(function (translation) {
+						self.error = translation;
+						$rootScope.$apply();
+					});
 				});
 				break;
 
@@ -30,19 +34,25 @@ angular.module('component.authenticate').component('authenticate', {
 				break;
 
 			default:
-				self.error = "Invalid or Expired Link";
-				$rootScope.$apply();
+				$translate('auth.errors.default').then(function (translation) {
+					self.error = translation;
+					$rootScope.$apply();
+				});
 				break;
 		}
 		
 		self.change = function() {
 			self.mode = "resetPassword";
 			extraAuth.confirmPasswordReset(self.code, self.newPassword).then(function() {
-				self.message = "Pasword Reset, you may now login";
-				$rootScope.$apply();
+				$translate('auth.messages.reset').then(function (translation) {
+					self.message = translation;
+					$rootScope.$apply();
+				});
 			}).catch(function() {
-				self.error = "Bad Password or Invalid/Expired Reset Link";
-				$rootScope.$apply();
+				$translate('auth.errors.reset').then(function (translation) {
+					self.error = translation;
+					$rootScope.$apply();
+				});
 			});
 		}
 	}]

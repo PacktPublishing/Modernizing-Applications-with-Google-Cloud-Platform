@@ -13,7 +13,7 @@ public class Password extends AbstractValueObject {
 
 	@NotEmpty(message = "Password is required")
 	@StrongPassword(message = "Invalid Password")
-	@Column(columnDefinition = "CHAR(60)")
+	@Column(columnDefinition = "CHAR(60)", nullable = false)
 	private String password;
 
 	private Password() {

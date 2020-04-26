@@ -100,13 +100,10 @@ public class Account extends AbstractAggregate {
 		return new String[] { "transactions" };
 	}
 
-	public Transaction depositFunds(final Amount amount, final String description) {
-		return depositFunds(amount, description, null);
-	}
-
 	public Transaction depositFunds(final Amount amount, 
 			final String description,
-			final EntityId referenceAccountId) {
+			final EntityId referenceAccountId,
+			final boolean isCorrection) {
 		balance = balance.add(amount);
 
 		final Transaction.Builder builder = 
@@ -117,6 +114,7 @@ public class Account extends AbstractAggregate {
 				.forAmount(amount)
 				.withDescrption(description)
 				.withReferenceAccountId(referenceAccountId)
+				.asCorrection(isCorrection)
 				.build();
 
 		transactions.add(transaction);
@@ -154,10 +152,6 @@ public class Account extends AbstractAggregate {
 			.filter(transaction -> 
 				TransactionType.WITHDRAWAL.equals(transaction.getType()))
 			.collect(Collectors.toList());
-	}
-
-	public Transaction withdrawFunds(final Amount amount, final String description) {
-		return withdrawFunds(amount, description, null);
 	}
 
 	public Transaction withdrawFunds(final Amount amount,

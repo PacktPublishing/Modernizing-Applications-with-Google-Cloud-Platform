@@ -1,5 +1,6 @@
 package uk.me.jasonmarston.domain.value;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotEmpty;
 
@@ -10,6 +11,7 @@ public class Token extends AbstractValueObject {
 	private static final long serialVersionUID = 1L;
 
 	@NotEmpty(message = "Token is required")
+	@Column(nullable = false)
 	private String token;
 
 	private Token() {

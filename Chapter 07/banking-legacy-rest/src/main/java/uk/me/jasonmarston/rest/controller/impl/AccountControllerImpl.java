@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import uk.me.jasonmarston.bean.AccountBean;
-import uk.me.jasonmarston.bean.AccountNameBean;
-import uk.me.jasonmarston.bean.DepositBean;
-import uk.me.jasonmarston.bean.TransactionBean;
-import uk.me.jasonmarston.bean.WithdrawalBean;
+import uk.me.jasonmarston.bean.impl.AccountBean;
+import uk.me.jasonmarston.bean.impl.AccountNameBean;
+import uk.me.jasonmarston.bean.impl.DepositBean;
+import uk.me.jasonmarston.bean.impl.TransactionBean;
+import uk.me.jasonmarston.bean.impl.WithdrawalBean;
 import uk.me.jasonmarston.domain.aggregate.Account;
 import uk.me.jasonmarston.domain.aggregate.User;
 import uk.me.jasonmarston.domain.details.TransactionDetails;
@@ -33,6 +33,8 @@ import uk.me.jasonmarston.domain.factory.details.TransactionDetailsBuilderFactor
 import uk.me.jasonmarston.domain.factory.details.TransactionIdentifierDetailsBuilderFactory;
 import uk.me.jasonmarston.domain.service.AccountService;
 import uk.me.jasonmarston.domain.value.Amount;
+import uk.me.jasonmarston.event.impl.WithdrawalSucceededEvent;
+import uk.me.jasonmarston.event.publisher.impl.AccountEventPublisher;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 import uk.me.jasonmarston.rest.controller.AccountController;
 import uk.me.jasonmarston.rest.controller.message.impl.Message;
@@ -47,6 +49,9 @@ public class AccountControllerImpl implements AccountController {
     
     @Autowired
     private TransactionIdentifierDetailsBuilderFactory transactionIdentifierDetailsBuilderFactory;
+    
+    @Autowired
+    private AccountEventPublisher accountEventPublisher;
 
     @Override
     @PreAuthorize("hasRole('USER')")
@@ -116,7 +121,8 @@ public class AccountControllerImpl implements AccountController {
     @RequestMapping(path = "/account", 
     	method=RequestMethod.GET,
     	produces = "application/json")
-    public ResponseEntity<?> getAccounts(@AuthenticationPrincipal final User user) {
+    public ResponseEntity<?> getAccounts(
+    		@AuthenticationPrincipal final User user) {
    		final List<Account> accounts = accountService
    				.getAccounts(user.getUid());
    		final List<AccountBean> accountBeans = new ArrayList<AccountBean>();
@@ -278,7 +284,8 @@ public class AccountControllerImpl implements AccountController {
 			@AuthenticationPrincipal final User user) {
 	   		final Account account = accountService
 	   				.getAccount(new EntityId(accountId));
-	   		if(account == null || !account.getOwnerId().equals(user.getUid())) {
+	   		if(account == null 
+	   				|| !account.getOwnerId().equals(user.getUid())) {
 	   			return ResponseEntity
 	   					.badRequest()
 	   					.body(new Message("Invalid Account"));
@@ -293,7 +300,8 @@ public class AccountControllerImpl implements AccountController {
 					.withTransactionId(new EntityId(id))
 					.build();
 			
-			final Transaction withdrawal = accountService.getWithdrawal(details);
+			final Transaction withdrawal = accountService
+					.getWithdrawal(details);
 			if(withdrawal == null) {
 	   			return ResponseEntity
 	   					.badRequest()
@@ -365,18 +373,47 @@ public class AccountControllerImpl implements AccountController {
 					.body(new Message("Invalid Account"));
 		}
 
+		if(withdrawal.getOtherAccount() != null) {
+			final Account otherAccount = accountService
+					.getAccount(new EntityId(withdrawal.getOtherAccount()));
+			if(!otherAccount.getOwnerId().equals(user.getUid())) {
+				return ResponseEntity
+						.badRequest()
+						.body(new Message("Invalid Other Account"));
+			}
+		}
+
 		final TransactionDetails.Builder builder = 
 				transactionDetailsBuilderFactory
 					.create();
 
-		final TransactionDetails details = builder
-				.forAccountId(new EntityId(id))
+		builder.forAccountId(new EntityId(id))
 				.withAmount(new Amount(withdrawal.getAmount().toString()))
-				.withDescription(withdrawal.getDescription())
+				.withDescription(withdrawal.getDescription());
+
+		if(withdrawal.getOtherAccount() != null
+				&& !account.getId().getId().equals(
+						withdrawal.getOtherAccount())) {
+			builder.withReferenceAccountId(
+					new EntityId(withdrawal.getOtherAccount()));
+		}
+
+		final TransactionDetails details = builder
 				.build();
 
 		final Transaction transaction = accountService
 				.withdrawFunds(details);
+		
+		final TransactionDetails successDetails = builder
+				.withJournalCode(transaction.getJournalCode())
+				.withReferenceAccountId(transaction.getReferenceAccountId())
+				.asCorrection(transaction.isCorrection())
+				.build();
+
+		final WithdrawalSucceededEvent event = 
+				new WithdrawalSucceededEvent(successDetails);
+
+		accountEventPublisher.publish(event);
 
 		final URI location = ServletUriComponentsBuilder
 				.fromCurrentRequest()

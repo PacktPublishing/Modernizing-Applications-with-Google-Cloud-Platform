@@ -56,7 +56,13 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 		try {
 			final String jwt = getJwtFromRequest(request);
 			if (StringUtils.hasText(jwt)) {
-				final User user = userService.sync(auth.verifyIdToken(jwt));
+				User user = null;
+				try {
+					user = userService.sync(auth.verifyIdToken(jwt));
+				}
+				catch(RuntimeException e) {
+					user = userService.sync(auth.verifyIdToken(jwt));
+				}
 				user.setCredentials(jwt);
 
 				final UsernamePasswordAuthenticationToken authentication = 

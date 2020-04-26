@@ -1,30 +1,38 @@
 <div class="row">
-	<h1>Change Password</h1>
+	<h1 ng-bind="'change.heading' | translate"></h1>
 </div>
-<div class="row">
-	<form id="change">
+<form id="change">
+	<div class="row">
 		<div class="col-md-4"></div>
 		<div class="col-md-4">
 			<div class="form-group">
-				<label for="currentPassword">Current Password</label>
-				<input id="currentPassword" placeholder="Enter current password" type="password" ng-model="$ctrl.currentPassword" class="form-control" required/>
+				<label for="currentPassword" ng-bind="'change.currentPassword.label' | translate"></label>
+				<input id="currentPassword" data-required-error="{{'change.currentPassword.errors.required' | translate}}" placeholder="{{'change.currentPassword.placeholder' | translate}}" type="password" ng-model="$ctrl.currentPassword" class="form-control" required/>
 				<div class="help-block with-errors"></div>
 				<div class="text-danger" ng-bind="$ctrl.currentPasswordError"></div>
-				<div class="text-danger" ng-bind="$ctrl.generalError"></div>
 			</div>
 			<div class="form-group">
-				<label for="newPassword">New Password</label>
-				<input pattern="{{$ctrl.strongPattern}}" data-pattern-error="Weak Password" id="newPassword" placeholder="Enter new password" type="password" ng-model="$ctrl.newPassword" class="form-control" required/>
+				<label for="newPassword" ng-bind="'change.newPassword.label' | translate"></label>
+				<input pattern="{{$ctrl.strongPattern}}" data-required-error="{{'change.newPassword.errors.required' | translate}}" data-pattern-error="{{'change.newPassword.errors.pattern' | translate}}" id="newPassword" placeholder="{{'change.newPassword.placeholder' | translate}}" type="password" ng-model="$ctrl.newPassword" class="form-control" required/>
 				<div class="help-block with-errors"></div>
 			</div>
 			<div class="form-group">
-				<label for="confirmPassword">Confirm Password</label>
-				<input data-match="#newPassword" data-match-error="Passwords do not match" id="confirmPassword" placeholder="Confirm password" type="password" ng-model="$ctrl.confirmPassword" class="form-control" required/>
+				<label for="confirmPassword" ng-bind="'change.confirmPassword.label' | translate"></label>
+				<input data-match="#newPassword" data-required-error="{{'change.confirmPassword.errors.required' | translate}}" data-match-error="{{'change.confirmPassword.errors.match' | translate}}" id="confirmPassword" placeholder="{{'change.confirmPassword.placeholder' | translate}}" type="password" ng-model="$ctrl.confirmPassword" class="form-control" required/>
 				<div class="help-block with-errors"></div>
 				<div class="text-danger" ng-bind="$ctrl.newPasswordError"></div>
 			</div>
-			<button type="submit" class="btn btn-primary btn-block" ng-click="$ctrl.change()">Change Password</button>
 		</div>
 		<div class="col-md-4"></div>
-	</form>
-</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-2">
+			<button type="submit" class="btn btn-primary btn-block" ng-click="$ctrl.change()" ng-bind="'change.submit' | translate"></button>
+		</div>
+		<div class="col-md-2">
+			<button type="button" class="btn btn-primary btn-block" ng-click="$ctrl.cancel()" ng-bind="'change.cancel' | translate"></button>
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+</form>
