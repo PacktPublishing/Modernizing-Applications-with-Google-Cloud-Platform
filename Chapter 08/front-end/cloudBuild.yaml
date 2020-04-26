@@ -1,0 +1,8 @@
+steps:
+- name: 'ubuntu'
+  args: ['bash', '-c', 'ls -al; pwd; tar -czvf ./ui.tar.gz ./WebContent/*']
+  dir: 'front-end'
+artifacts:
+  objects:
+    location: 'gs://jm-application/'
+    paths: ['front-end/ui.tar.gz']

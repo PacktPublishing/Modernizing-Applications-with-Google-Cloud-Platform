@@ -6,3 +6,10 @@ steps:
   - 'artifactory_password=${_ARTIFACTORY_PASSWORD}'
   - 'artifactory_user=${_ARTIFACTORY_USER}'
   dir: 'banking-legacy-rest'
+- name: 'ubuntu'
+  args: ['bash', '-c', 'cp ./build/libs/*.war ./build/libs/bank.war']
+  dir: 'banking-legacy-rest'
+artifacts:
+  objects:
+    location: 'gs://jm-application/'
+    paths: ['banking-legacy-rest/build/libs/bank.war']
