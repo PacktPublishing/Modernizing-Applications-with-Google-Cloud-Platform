@@ -1,5 +1,5 @@
 server {
-    server_name fred.jasonmarston.me.uk www.fred.jasonmarston.me.uk; # managed by Certbot
+    server_name banking.jasonmarston.me.uk www.banking.jasonmarston.me.uk; # managed by Certbot
 
 	if ($http_x_forwarded_proto = '') {
 		set $http_x_forwarded_proto  $scheme;
@@ -33,18 +33,18 @@ server {
     listen 443 ssl; # managed by Certbot
 }
 server {
-    if ($host = www.fred.jasonmarston.me.uk) {
+    if ($host = www.banking.jasonmarston.me.uk) {
         return 301 https://$host$request_uri;
     } # managed by Certbot
 
 
-    if ($host = fred.jasonmarston.me.uk) {
+    if ($host = banking.jasonmarston.me.uk) {
         return 301 https://$host$request_uri;
     } # managed by Certbot
 
 
 	listen 80 default_server;
 	listen [::]:80 default_server;
-    server_name fred.jasonmarston.me.uk www.fred.jasonmarston.me.uk;
+    server_name banking.jasonmarston.me.uk www.banking.jasonmarston.me.uk;
     return 404; # managed by Certbot
 }
