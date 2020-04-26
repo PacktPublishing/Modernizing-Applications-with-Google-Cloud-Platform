@@ -1,8 +1,8 @@
 steps:
 - name: 'ubuntu'
-  args: ['bash', '-c', 'cd WebContent; tar -czvf ./front-end.tar.gz .']
+  args: ['bash', '-c', 'cd WebContent; tar -czvf ../front-end.tar.gz .']
   dir: 'front-end'
 artifacts:
   objects:
     location: 'gs://jm-application/'
-    paths: ['front-end/WebContent/front-end.tar.gz']
+    paths: ['front-end/front-end.tar.gz']
