@@ -1,6 +1,6 @@
 angular.module('component.authenticate').component('authenticate', {
 	templateUrl: 'component/auth/template.html',
-	controller: ['Auth', '$location', '$timeout', '$rootScope', '$transalate', function AuthenticateController(Auth, $location, $timeout, $rootScope, $translate) {
+	controller: ['Auth', '$location', '$timeout', '$rootScope', '$translate', function AuthenticateController(Auth, $location, $timeout, $rootScope, $translate) {
 		var self = this;
 		self.mode = $location.search().mode;
 		self.code = $location.search().oobCode;
@@ -13,12 +13,12 @@ angular.module('component.authenticate').component('authenticate', {
 		switch (self.mode) {
 			case "verifyEmail":
 				extraAuth.applyActionCode(self.code).then(function() {
-					$translate('auth.messages.verificaion').then(function (translation) {
+					$translate('auth.messages.verification').then(function (translation) {
 						self.message = translation;
 						$rootScope.$apply();
 					});
 				}).catch(function() {
-					$translate('auth.errors.verificaion').then(function (translation) {
+					$translate('auth.errors.verification').then(function (translation) {
 						self.error = translation;
 						$rootScope.$apply();
 					});
