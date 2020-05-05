@@ -18,7 +18,6 @@ plugins {
 	id 'com.jfrog.artifactory' version '4.11.0'
     id 'java-library'
     id 'war'
-    id 'org.gretty' version '2.3.1'
     id 'org.springframework.boot' version '2.0.5.RELEASE'
 }
 
@@ -79,10 +78,4 @@ artifactory {
 			password = "$System.env.artifactory_password"
 		}
 	}
-}
-
-gretty {
-	servletContainer = 'jetty9.4'
-	jetty94Version = '9.4.9.v20180320'
-	contextPath = '/'
 }
