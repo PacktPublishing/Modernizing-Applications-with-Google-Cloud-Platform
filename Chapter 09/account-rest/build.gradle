@@ -47,6 +47,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	runtimeOnly 'mysql:mysql-connector-java'
 
+	//implementation 'io.netty:netty-tcnative-boringssl-static:1.21.0.Final'
+
 	// Messaging support
 	implementation 'org.springframework.cloud:spring-cloud-gcp-starter-pubsub:1.1.3.RELEASE'
     implementation 'org.springframework.integration:spring-integration-core:5.0.14.RELEASE'
