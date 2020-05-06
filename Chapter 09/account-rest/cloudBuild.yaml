@@ -1,15 +1,15 @@
 steps:
 - name: 'gcr.io/cloud-builders/gradle'
-  args: ['bootJar', 'artifactoryPublish']
+  args: ['bootWar', 'artifactoryPublish']
   env:
   - 'artifactory_contextUrl=${_ARTIFACTORY_URL}'
   - 'artifactory_password=${_ARTIFACTORY_PASSWORD}'
   - 'artifactory_user=${_ARTIFACTORY_USER}'
-  dir: 'banking-legacy-rest'
+  dir: 'account-rest'
 - name: 'ubuntu'
-  args: ['bash', '-c', 'cp ./build/libs/*.war ./build/libs/bank.war']
-  dir: 'banking-legacy-rest'
+  args: ['bash', '-c', 'cp ./build/libs/*.war ./build/libs/account.war']
+  dir: 'account-rest'
 artifacts:
   objects:
     location: 'gs://jm-application/'
-    paths: ['banking-legacy-rest/build/libs/bank.war']
+    paths: ['account-rest/build/libs/account.war']
