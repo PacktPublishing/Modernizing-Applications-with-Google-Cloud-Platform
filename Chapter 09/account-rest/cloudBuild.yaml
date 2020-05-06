@@ -1,7 +1,7 @@
 steps:
 # Docker build and publish
 - name: 'gcr.io/cloud-builders/gradle'
-  args: ['bootJar', 'artifactoryPublish']
+  args: ['bootJar']
   env:
   - 'artifactory_contextUrl=${_ARTIFACTORY_URL}'
   - 'artifactory_password=${_ARTIFACTORY_PASSWORD}'
@@ -15,7 +15,7 @@ steps:
   dir: 'account-rest'
 # Traditional build and publish
 - name: 'gcr.io/cloud-builders/gradle'
-  args: ['bootWar', 'artifactoryPublish']
+  args: ['bootWar']
   env:
   - 'artifactory_contextUrl=${_ARTIFACTORY_URL}'
   - 'artifactory_password=${_ARTIFACTORY_PASSWORD}'
