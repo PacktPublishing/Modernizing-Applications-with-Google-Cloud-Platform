@@ -1,4 +1,12 @@
 steps:
+# Docker build and publish
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/account-rest', '.']
+  dir: 'front-end'
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/account-rest']
+  dir: 'front-end'
+# Traditional build and publish
 - name: 'ubuntu'
   args: ['bash', '-c', 'cd WebContent; tar -czvf ../front-end.tar.gz .']
   dir: 'front-end'
