@@ -1,0 +1,17 @@
+In cloud shell
+--------------
+
+gcloud container clusters create banking-cluster --num-nodes 1 --zone europe-west2-c --enable-ip-alias --machine-type=n1-standard-2
+
+kubectl apply -f environment.yaml
+kubectl create secret generic pubsub-credentials-secret --from-file=pubsub.json=./pubsub.json
+kubectl create secret generic firebase-credentials-secret --from-file=firebase.json=./firebase.json
+kubectl create secret generic cloudsql-credentials-secret --from-file=cloudsql.json=./cloudsql.json
+kubectl apply -f user.yaml
+kubectl apply -f account.yaml
+
+kubectl create configmap nginx-configmap --from-file=default.conf=./default.conf
+kubectl apply -f front-end.yaml
+
+kubectl apply -f certificate.yaml
+kubectl apply -f ingress.yaml

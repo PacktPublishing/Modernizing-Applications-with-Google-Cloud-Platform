@@ -18,7 +18,8 @@ plugins {
 	id 'com.jfrog.artifactory' version '4.11.0'
     id 'java-library'
     id 'war'
-    id 'org.springframework.boot' version '2.0.5.RELEASE'
+    id 'org.springframework.boot' version '2.3.0.RC1'
+	id "io.spring.dependency-management" version "1.0.9.RELEASE"
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -47,11 +48,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	runtimeOnly 'mysql:mysql-connector-java'
 
-	//implementation 'io.netty:netty-tcnative-boringssl-static:1.21.0.Final'
-
 	// Messaging support
-	implementation 'org.springframework.cloud:spring-cloud-gcp-starter-pubsub:1.1.3.RELEASE'
-    implementation 'org.springframework.integration:spring-integration-core:5.0.14.RELEASE'
+	implementation 'org.springframework.cloud:spring-cloud-gcp-starter-pubsub:1.2.2.RELEASE'
+    implementation 'org.springframework.integration:spring-integration-core:5.2.6.RELEASE'
 	
 	implementation 'uk.me.jasonmarston.framework:domain-driven-design:1.0.0-SNAPSHOT'
 	implementation 'uk.me.jasonmarston.domain:account-domain:1.0.0-SNAPSHOT'

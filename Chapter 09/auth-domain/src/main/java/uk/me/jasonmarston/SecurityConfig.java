@@ -29,20 +29,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
-			.csrf().disable() // Is this actually needed?
+			.csrf().disable()
 			.formLogin().disable()
 			.httpBasic().disable()
 			.authorizeRequests()
-				.antMatchers("/",
-					"/error",
-					"/favicon.ico",
-					"/**/*.png",
-					"/**/*.gif",
-					"/**/*.svg",
-					"/**/*.jpg",
-					"/**/*.html",
-					"/**/*.css",
-					"/**/*.js").permitAll()
+				.antMatchers("/healthcheck").permitAll()
 				.anyRequest().authenticated();
 
         http.addFilterBefore(tokenAuthenticationFilter(),

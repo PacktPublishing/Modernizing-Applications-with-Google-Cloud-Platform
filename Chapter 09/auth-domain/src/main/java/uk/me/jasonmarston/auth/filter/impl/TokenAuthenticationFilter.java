@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.NestedServletException;
@@ -27,7 +28,9 @@ import uk.me.jasonmarston.framework.authentication.impl.JwtValidation;
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 	private static final Logger LOGGER = 
 			LoggerFactory.getLogger(TokenAuthenticationFilter.class);
-	
+
+	private static final AntPathRequestMatcher HEALTH_CHECK_MATCHER = new AntPathRequestMatcher("/healthcheck", "GET");
+
 	@Autowired
 	@Lazy
 	private AuthService authService;
@@ -48,6 +51,10 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 									final FilterChain filterChain)
 			throws ServletException, IOException {
 		try {
+			if(HEALTH_CHECK_MATCHER.matches(request)) {
+				doChain(request, response, filterChain);
+				return;
+			}
 			final String jwt = getJwtFromRequest(request);
 			if (StringUtils.hasText(jwt)) {
 				User user = null;
@@ -71,15 +78,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 				SecurityContextHolder.getContext()
 						.setAuthentication(authentication);
 
-				try {
-					filterChain.doFilter(request, response);
-				}
-				catch(final NestedServletException e) { 
-					logError(e);
-					response.sendError(
-							HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-							"Internal server error");
-				}
+				doChain(request, response, filterChain);
 			}
 			else {
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
@@ -96,6 +95,19 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
 					"Please provide valid credentials");
         }
+	}
+
+	private void doChain(final HttpServletRequest request, final HttpServletResponse response,
+			final FilterChain filterChain) throws IOException, ServletException {
+		try {
+			filterChain.doFilter(request, response);
+		}
+		catch(final NestedServletException e) { 
+			logError(e);
+			response.sendError(
+					HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+					"Internal server error");
+		}
 	}
 
 	private UsernamePasswordAuthenticationToken createAuthenticationToken(

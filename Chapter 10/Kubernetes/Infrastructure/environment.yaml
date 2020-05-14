@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-configMap
+type: Opaque
+stringData:
+  BANKING_PROFILES_ACTIVE: DEV
+  BANKING_DATASOURCE_DDL_AUTO: update
+  BANKING_DATASOURCE_DIALECT: org.hibernate.dialect.MySQL5Dialect
+  USER_DATASOURCE_URL: jdbc:mysql://192.168.1.101:3306/user?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=yes&characterEncoding=UTF-8
+  USER_DATASOURCE_USERNAME: mysqladmin
+  USER_DATASOURCE_PASSWORD: L0n3wulf!
+  ACCOUNT_DATASOURCE_URL: jdbc:mysql://192.168.1.101:3306/account?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=yes&characterEncoding=UTF-8
+  ACCOUNT_DATASOURCE_USERNAME: mysqladmin
+  ACCOUNT_DATASOURCE_PASSWORD: L0n3wulf!
+  BANKING_LOGGING_LEVEL: WARN
+  BANKING_INITIAL_ADMIN_EMAIL: jason@jasonmarston.me.uk
+  PUB_SUB_CREDENTIALS: /credentials/pubsub.json
+  GOOGLE_APPLICATION_CREDENTIALS: /credentials/firebase.json

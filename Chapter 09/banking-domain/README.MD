@@ -1,2 +1,0 @@
-# Banking Domain
-
