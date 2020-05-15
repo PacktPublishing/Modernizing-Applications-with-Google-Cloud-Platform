@@ -19,11 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import uk.me.jasonmarston.bean.impl.AccountBean;
-import uk.me.jasonmarston.bean.impl.AccountNameBean;
-import uk.me.jasonmarston.bean.impl.DepositBean;
-import uk.me.jasonmarston.bean.impl.TransactionBean;
-import uk.me.jasonmarston.bean.impl.WithdrawalBean;
 import uk.me.jasonmarston.domain.aggregate.Account;
 import uk.me.jasonmarston.domain.aggregate.User;
 import uk.me.jasonmarston.domain.details.TransactionDetails;
@@ -33,11 +28,16 @@ import uk.me.jasonmarston.domain.factory.details.TransactionDetailsBuilderFactor
 import uk.me.jasonmarston.domain.factory.details.TransactionIdentifierDetailsBuilderFactory;
 import uk.me.jasonmarston.domain.service.AccountService;
 import uk.me.jasonmarston.domain.value.Amount;
+import uk.me.jasonmarston.event.bean.impl.Message;
 import uk.me.jasonmarston.event.bean.impl.WithdrawalSucceededEvent;
 import uk.me.jasonmarston.event.publisher.impl.AccountEventPublisher;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
+import uk.me.jasonmarston.rest.bean.impl.AccountBean;
+import uk.me.jasonmarston.rest.bean.impl.AccountNameBean;
+import uk.me.jasonmarston.rest.bean.impl.DepositBean;
+import uk.me.jasonmarston.rest.bean.impl.TransactionBean;
+import uk.me.jasonmarston.rest.bean.impl.WithdrawalBean;
 import uk.me.jasonmarston.rest.controller.AccountController;
-import uk.me.jasonmarston.rest.controller.message.impl.Message;
 
 @RestController
 public class AccountControllerImpl implements AccountController {

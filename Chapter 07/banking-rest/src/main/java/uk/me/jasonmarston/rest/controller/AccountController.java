@@ -4,10 +4,10 @@ import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 
-import uk.me.jasonmarston.bean.impl.AccountNameBean;
-import uk.me.jasonmarston.bean.impl.DepositBean;
-import uk.me.jasonmarston.bean.impl.WithdrawalBean;
 import uk.me.jasonmarston.domain.aggregate.User;
+import uk.me.jasonmarston.rest.bean.impl.AccountNameBean;
+import uk.me.jasonmarston.rest.bean.impl.DepositBean;
+import uk.me.jasonmarston.rest.bean.impl.WithdrawalBean;
 
 public interface AccountController {
 	ResponseEntity<?> depositFunds(final UUID id, final DepositBean deposit, final User user);

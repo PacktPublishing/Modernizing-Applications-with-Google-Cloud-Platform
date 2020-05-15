@@ -13,7 +13,7 @@ import uk.me.jasonmarston.domain.value.Amount;
 import uk.me.jasonmarston.event.bean.impl.DepositFailedEvent;
 import uk.me.jasonmarston.event.bean.impl.WithdrawalSucceededEvent;
 import uk.me.jasonmarston.event.handler.AbstractMessageHandler;
-import uk.me.jasonmarston.event.publisher.impl.AccountEventPublisher;
+import uk.me.jasonmarston.event.publisher.AccountEventPublisher;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 
 public class WithdrawalSuccessHandler extends AbstractMessageHandler {

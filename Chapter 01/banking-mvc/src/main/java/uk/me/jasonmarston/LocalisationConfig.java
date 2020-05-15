@@ -19,7 +19,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
-import uk.me.jasonmarston.mvc.filter.LocaleFilter;
+import uk.me.jasonmarston.mvc.filter.impl.LocaleFilter;
 
 @Configuration
 public class LocalisationConfig implements WebMvcConfigurer {

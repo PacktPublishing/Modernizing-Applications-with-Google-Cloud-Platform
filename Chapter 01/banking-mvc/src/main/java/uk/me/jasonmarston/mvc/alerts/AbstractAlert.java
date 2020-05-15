@@ -1,6 +1,6 @@
 package uk.me.jasonmarston.mvc.alerts;
 
-public class AbstractAlert {
+public abstract class AbstractAlert {
 	protected String type;
 	private String key;
 	

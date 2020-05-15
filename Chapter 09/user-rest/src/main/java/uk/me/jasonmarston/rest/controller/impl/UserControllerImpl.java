@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import uk.me.jasonmarston.bean.impl.UserBean;
 import uk.me.jasonmarston.domain.user.aggregate.User;
+import uk.me.jasonmarston.rest.bean.impl.UserBean;
 import uk.me.jasonmarston.rest.controller.UserController;
 
 @RestController
