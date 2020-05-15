@@ -20,8 +20,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import uk.me.jasonmarston.domain.user.aggregate.User;
-import uk.me.jasonmarston.domain.user.entity.Authority;
+import uk.me.jasonmarston.domain.user.aggregate.impl.User;
+import uk.me.jasonmarston.domain.user.entity.impl.Authority;
 
 @Configuration
 @EnableJpaRepositories(

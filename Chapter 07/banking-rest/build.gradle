@@ -52,6 +52,7 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-gcp-starter-pubsub:1.2.2.RELEASE'
     implementation 'org.springframework.integration:spring-integration-core:5.2.6.RELEASE'
 	
+	implementation 'uk.me.jasonmarston.framework:firebase-authentication:1.0.0-SNAPSHOT'
 	implementation 'uk.me.jasonmarston.framework:domain-driven-design:1.0.0-SNAPSHOT'
 	implementation 'uk.me.jasonmarston.domain:banking-domain:1.0.0-SNAPSHOT'
 }

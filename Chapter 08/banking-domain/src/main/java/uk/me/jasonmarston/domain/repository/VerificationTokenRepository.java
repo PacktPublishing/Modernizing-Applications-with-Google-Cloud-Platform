@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
 
-import uk.me.jasonmarston.domain.aggregate.VerificationToken;
-import uk.me.jasonmarston.domain.value.Token;
+import uk.me.jasonmarston.domain.aggregate.impl.VerificationToken;
+import uk.me.jasonmarston.domain.value.impl.Token;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 
 @Repository

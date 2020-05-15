@@ -16,19 +16,19 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
-import uk.me.jasonmarston.domain.account.aggregate.Account;
-import uk.me.jasonmarston.domain.account.details.TransactionDetails;
-import uk.me.jasonmarston.domain.account.details.TransactionIdentifierDetails;
-import uk.me.jasonmarston.domain.account.details.TransferIdentifierDetails;
-import uk.me.jasonmarston.domain.account.entity.Transaction;
+import uk.me.jasonmarston.domain.account.aggregate.impl.Account;
+import uk.me.jasonmarston.domain.account.details.impl.TransactionDetails;
+import uk.me.jasonmarston.domain.account.details.impl.TransactionIdentifierDetails;
+import uk.me.jasonmarston.domain.account.details.impl.TransferIdentifierDetails;
+import uk.me.jasonmarston.domain.account.entity.impl.Transaction;
 import uk.me.jasonmarston.domain.account.factory.aggregate.AccountBuilderFactory;
 import uk.me.jasonmarston.domain.account.repository.AccountRepository;
 import uk.me.jasonmarston.domain.account.repository.TransactionRepository;
-import uk.me.jasonmarston.domain.account.repository.specification.TransactionSpecification.DepositHasIdAndAccountId;
-import uk.me.jasonmarston.domain.account.repository.specification.TransactionSpecification.TransactionHasIdAndAccountId;
-import uk.me.jasonmarston.domain.account.repository.specification.TransactionSpecification.WithdrawalHasIdAndAccountId;
+import uk.me.jasonmarston.domain.account.repository.specification.impl.TransactionSpecification.DepositHasIdAndAccountId;
+import uk.me.jasonmarston.domain.account.repository.specification.impl.TransactionSpecification.TransactionHasIdAndAccountId;
+import uk.me.jasonmarston.domain.account.repository.specification.impl.TransactionSpecification.WithdrawalHasIdAndAccountId;
 import uk.me.jasonmarston.domain.account.service.AccountService;
-import uk.me.jasonmarston.domain.account.value.Balance;
+import uk.me.jasonmarston.domain.account.value.impl.Balance;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 
 @Service

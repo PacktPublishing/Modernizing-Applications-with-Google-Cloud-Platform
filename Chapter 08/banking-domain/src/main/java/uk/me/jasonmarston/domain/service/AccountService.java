@@ -6,12 +6,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import uk.me.jasonmarston.domain.aggregate.Account;
-import uk.me.jasonmarston.domain.details.TransactionDetails;
-import uk.me.jasonmarston.domain.details.TransactionIdentifierDetails;
-import uk.me.jasonmarston.domain.details.TransferIdentifierDetails;
-import uk.me.jasonmarston.domain.entity.Transaction;
-import uk.me.jasonmarston.domain.value.Balance;
+import uk.me.jasonmarston.domain.aggregate.impl.Account;
+import uk.me.jasonmarston.domain.details.impl.TransactionDetails;
+import uk.me.jasonmarston.domain.details.impl.TransactionIdentifierDetails;
+import uk.me.jasonmarston.domain.details.impl.TransferIdentifierDetails;
+import uk.me.jasonmarston.domain.entity.impl.Transaction;
+import uk.me.jasonmarston.domain.value.impl.Balance;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 
 public interface AccountService {

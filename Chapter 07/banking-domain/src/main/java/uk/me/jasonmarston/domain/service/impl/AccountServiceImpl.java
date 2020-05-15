@@ -16,19 +16,19 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
-import uk.me.jasonmarston.domain.aggregate.Account;
-import uk.me.jasonmarston.domain.details.TransactionDetails;
-import uk.me.jasonmarston.domain.details.TransactionIdentifierDetails;
-import uk.me.jasonmarston.domain.details.TransferIdentifierDetails;
-import uk.me.jasonmarston.domain.entity.Transaction;
+import uk.me.jasonmarston.domain.aggregate.impl.Account;
+import uk.me.jasonmarston.domain.details.impl.TransactionDetails;
+import uk.me.jasonmarston.domain.details.impl.TransactionIdentifierDetails;
+import uk.me.jasonmarston.domain.details.impl.TransferIdentifierDetails;
+import uk.me.jasonmarston.domain.entity.impl.Transaction;
 import uk.me.jasonmarston.domain.factory.aggregate.AccountBuilderFactory;
 import uk.me.jasonmarston.domain.repository.AccountRepository;
 import uk.me.jasonmarston.domain.repository.TransactionRepository;
-import uk.me.jasonmarston.domain.repository.specification.TransactionSpecification.DepositHasIdAndAccountId;
-import uk.me.jasonmarston.domain.repository.specification.TransactionSpecification.TransactionHasIdAndAccountId;
-import uk.me.jasonmarston.domain.repository.specification.TransactionSpecification.WithdrawalHasIdAndAccountId;
+import uk.me.jasonmarston.domain.repository.specification.impl.TransactionSpecification.DepositHasIdAndAccountId;
+import uk.me.jasonmarston.domain.repository.specification.impl.TransactionSpecification.TransactionHasIdAndAccountId;
+import uk.me.jasonmarston.domain.repository.specification.impl.TransactionSpecification.WithdrawalHasIdAndAccountId;
 import uk.me.jasonmarston.domain.service.AccountService;
-import uk.me.jasonmarston.domain.value.Balance;
+import uk.me.jasonmarston.domain.value.impl.Balance;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 
 @Service

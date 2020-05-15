@@ -8,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import uk.me.jasonmarston.framework.domain.entity.BeanHelper;
 
-public class AbstractDomainObject implements DomainObject {
+public abstract class AbstractDomainObject implements DomainObject {
 	private static final long serialVersionUID = 1L;
 
 	protected ToStringBuilder _addFieldsToToString() {

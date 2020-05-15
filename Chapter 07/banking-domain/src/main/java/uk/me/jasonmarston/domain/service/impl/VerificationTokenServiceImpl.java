@@ -14,12 +14,12 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
-import uk.me.jasonmarston.domain.aggregate.VerificationToken;
+import uk.me.jasonmarston.domain.aggregate.impl.VerificationToken;
 import uk.me.jasonmarston.domain.factory.aggregate.VerificationTokenBuilderFactory;
 import uk.me.jasonmarston.domain.repository.VerificationTokenRepository;
-import uk.me.jasonmarston.domain.repository.specification.VerificationTokenSpecification;
+import uk.me.jasonmarston.domain.repository.specification.impl.VerificationTokenSpecification;
 import uk.me.jasonmarston.domain.service.VerificationTokenService;
-import uk.me.jasonmarston.domain.value.Token;
+import uk.me.jasonmarston.domain.value.impl.Token;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 
 @Service

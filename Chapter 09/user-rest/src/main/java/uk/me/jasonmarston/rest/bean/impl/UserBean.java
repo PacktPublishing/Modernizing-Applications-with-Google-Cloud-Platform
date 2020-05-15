@@ -1,6 +1,6 @@
 package uk.me.jasonmarston.rest.bean.impl;
 
-import uk.me.jasonmarston.domain.user.aggregate.User;
+import uk.me.jasonmarston.domain.user.aggregate.impl.User;
 
 public class UserBean {
 	private String locale;

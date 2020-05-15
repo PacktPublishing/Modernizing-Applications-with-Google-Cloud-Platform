@@ -17,13 +17,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
-import uk.me.jasonmarston.domain.aggregate.User;
-import uk.me.jasonmarston.domain.details.RegistrationDetails;
+import uk.me.jasonmarston.domain.aggregate.impl.User;
+import uk.me.jasonmarston.domain.details.impl.RegistrationDetails;
 import uk.me.jasonmarston.domain.factory.aggregate.UserBuilderFactory;
 import uk.me.jasonmarston.domain.repository.UserRepository;
 import uk.me.jasonmarston.domain.service.UserService;
-import uk.me.jasonmarston.domain.value.EmailAddress;
-import uk.me.jasonmarston.domain.value.Password;
+import uk.me.jasonmarston.domain.value.impl.EmailAddress;
+import uk.me.jasonmarston.domain.value.impl.Password;
 import uk.me.jasonmarston.framework.authentication.impl.Token;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 

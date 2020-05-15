@@ -3,7 +3,7 @@ package uk.me.jasonmarston.rest.bean.impl;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import uk.me.jasonmarston.domain.account.aggregate.Account;
+import uk.me.jasonmarston.domain.account.aggregate.impl.Account;
 
 public class AccountBean {
 	private String ownerId;

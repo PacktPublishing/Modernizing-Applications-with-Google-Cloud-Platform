@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
 
-import uk.me.jasonmarston.domain.user.aggregate.User;
-import uk.me.jasonmarston.domain.user.value.EmailAddress;
+import uk.me.jasonmarston.domain.user.aggregate.impl.User;
+import uk.me.jasonmarston.domain.user.value.impl.EmailAddress;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 
 @Repository

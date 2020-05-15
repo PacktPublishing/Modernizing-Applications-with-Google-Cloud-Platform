@@ -5,9 +5,9 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import uk.me.jasonmarston.domain.aggregate.ResetToken;
-import uk.me.jasonmarston.domain.value.EmailAddress;
-import uk.me.jasonmarston.domain.value.Token;
+import uk.me.jasonmarston.domain.aggregate.impl.ResetToken;
+import uk.me.jasonmarston.domain.value.impl.EmailAddress;
+import uk.me.jasonmarston.domain.value.impl.Token;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 
 public interface ResetTokenService {

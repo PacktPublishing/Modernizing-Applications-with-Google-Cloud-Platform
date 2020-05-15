@@ -24,7 +24,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.NestedServletException;
 
 import uk.me.jasonmarston.domain.auth.service.AuthService;
-import uk.me.jasonmarston.domain.user.aggregate.User;
+import uk.me.jasonmarston.domain.user.aggregate.impl.User;
 import uk.me.jasonmarston.framework.authentication.impl.JwtValidation;
 
 public class TokenAuthenticationFilter extends OncePerRequestFilter {

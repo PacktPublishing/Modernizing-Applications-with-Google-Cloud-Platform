@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import uk.me.jasonmarston.domain.auth.service.AuthService;
-import uk.me.jasonmarston.domain.user.aggregate.User;
+import uk.me.jasonmarston.domain.user.aggregate.impl.User;
 import uk.me.jasonmarston.domain.user.repository.UserRepository;
 import uk.me.jasonmarston.framework.authentication.impl.Token;
 

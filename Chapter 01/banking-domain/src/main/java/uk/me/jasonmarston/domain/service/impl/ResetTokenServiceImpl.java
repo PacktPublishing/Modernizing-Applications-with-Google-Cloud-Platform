@@ -14,15 +14,15 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
-import uk.me.jasonmarston.domain.aggregate.ResetToken;
-import uk.me.jasonmarston.domain.aggregate.User;
+import uk.me.jasonmarston.domain.aggregate.impl.ResetToken;
+import uk.me.jasonmarston.domain.aggregate.impl.User;
 import uk.me.jasonmarston.domain.factory.aggregate.ResetTokenBuilderFactory;
 import uk.me.jasonmarston.domain.repository.ResetTokenRepository;
 import uk.me.jasonmarston.domain.repository.UserRepository;
-import uk.me.jasonmarston.domain.repository.specification.ResetTokenSpecification;
+import uk.me.jasonmarston.domain.repository.specification.impl.ResetTokenSpecification;
 import uk.me.jasonmarston.domain.service.ResetTokenService;
-import uk.me.jasonmarston.domain.value.EmailAddress;
-import uk.me.jasonmarston.domain.value.Token;
+import uk.me.jasonmarston.domain.value.impl.EmailAddress;
+import uk.me.jasonmarston.domain.value.impl.Token;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 
 @Service

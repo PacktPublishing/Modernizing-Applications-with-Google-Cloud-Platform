@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
-import uk.me.jasonmarston.domain.details.TransactionDetails;
-import uk.me.jasonmarston.domain.details.TransferDetails;
+import uk.me.jasonmarston.domain.details.impl.TransactionDetails;
+import uk.me.jasonmarston.domain.details.impl.TransferDetails;
 import uk.me.jasonmarston.domain.service.AccountService;
 import uk.me.jasonmarston.domain.service.TransferService;
 

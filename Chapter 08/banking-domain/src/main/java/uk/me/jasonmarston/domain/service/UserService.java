@@ -5,10 +5,10 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
 
-import uk.me.jasonmarston.domain.aggregate.User;
-import uk.me.jasonmarston.domain.details.RegistrationDetails;
-import uk.me.jasonmarston.domain.value.EmailAddress;
-import uk.me.jasonmarston.domain.value.Password;
+import uk.me.jasonmarston.domain.aggregate.impl.User;
+import uk.me.jasonmarston.domain.details.impl.RegistrationDetails;
+import uk.me.jasonmarston.domain.value.impl.EmailAddress;
+import uk.me.jasonmarston.domain.value.impl.Password;
 import uk.me.jasonmarston.framework.authentication.impl.Token;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 

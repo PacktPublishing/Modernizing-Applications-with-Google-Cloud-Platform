@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessagingException;
 
-import uk.me.jasonmarston.domain.account.details.TransactionDetails;
-import uk.me.jasonmarston.domain.account.details.TransferIdentifierDetails;
+import uk.me.jasonmarston.domain.account.details.impl.TransactionDetails;
+import uk.me.jasonmarston.domain.account.details.impl.TransferIdentifierDetails;
 import uk.me.jasonmarston.domain.account.factory.details.TransactionDetailsBuilderFactory;
 import uk.me.jasonmarston.domain.account.factory.details.TransferIdentifierDetailsBuilderFactory;
 import uk.me.jasonmarston.domain.account.service.AccountService;
-import uk.me.jasonmarston.domain.account.value.Amount;
+import uk.me.jasonmarston.domain.account.value.impl.Amount;
 import uk.me.jasonmarston.event.bean.impl.DepositFailedEvent;
 import uk.me.jasonmarston.event.bean.impl.WithdrawalSucceededEvent;
 import uk.me.jasonmarston.event.handler.AbstractMessageHandler;

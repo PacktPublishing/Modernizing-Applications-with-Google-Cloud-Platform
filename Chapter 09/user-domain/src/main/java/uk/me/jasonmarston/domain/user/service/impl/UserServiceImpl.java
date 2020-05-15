@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
-import uk.me.jasonmarston.domain.user.aggregate.User;
+import uk.me.jasonmarston.domain.user.aggregate.impl.User;
 import uk.me.jasonmarston.domain.user.repository.UserRepository;
 import uk.me.jasonmarston.domain.user.service.UserService;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;

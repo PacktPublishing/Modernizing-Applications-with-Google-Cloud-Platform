@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
-import uk.me.jasonmarston.domain.account.entity.Transaction;
+import uk.me.jasonmarston.domain.account.entity.impl.Transaction;
 
 public class TransactionBean {
 	private ZonedDateTime dateTime;

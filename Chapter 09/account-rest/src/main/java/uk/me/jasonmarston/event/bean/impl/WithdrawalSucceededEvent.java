@@ -3,7 +3,7 @@ package uk.me.jasonmarston.event.bean.impl;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import uk.me.jasonmarston.domain.account.details.TransactionDetails;
+import uk.me.jasonmarston.domain.account.details.impl.TransactionDetails;
 
 public class WithdrawalSucceededEvent {
 	private UUID accountId;
