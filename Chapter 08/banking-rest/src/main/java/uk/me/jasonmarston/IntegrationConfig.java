@@ -18,10 +18,10 @@ import org.springframework.integration.router.HeaderValueRouter;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 
+import uk.me.jasonmarston.event.bean.impl.DepositFailedEvent;
+import uk.me.jasonmarston.event.bean.impl.WithdrawalSucceededEvent;
 import uk.me.jasonmarston.event.handler.impl.DepositFailureHandler;
 import uk.me.jasonmarston.event.handler.impl.WithdrawalSuccessHandler;
-import uk.me.jasonmarston.event.impl.DepositFailedEvent;
-import uk.me.jasonmarston.event.impl.WithdrawalSucceededEvent;
 
 @Configuration
 @EnableIntegration

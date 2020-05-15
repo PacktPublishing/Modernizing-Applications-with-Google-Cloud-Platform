@@ -1,4 +1,4 @@
-package uk.me.jasonmarston.event.impl;
+package uk.me.jasonmarston.event.bean.impl;
 
 import java.math.BigDecimal;
 import java.util.UUID;

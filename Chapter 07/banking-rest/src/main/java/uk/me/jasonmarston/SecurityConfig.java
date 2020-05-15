@@ -11,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import uk.me.jasonmarston.rest.controller.authentication.impl.TokenAuthenticationFilter;
+import uk.me.jasonmarston.auth.filter.impl.TokenAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -21,6 +21,8 @@ import uk.me.jasonmarston.rest.controller.authentication.impl.TokenAuthenticatio
         prePostEnabled = true
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	private static final String[] IGNORE_LIST = { "/healthcheck" };
+
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
 		http
@@ -32,10 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.formLogin().disable()
 			.httpBasic().disable()
-			.authorizeRequests().anyRequest().authenticated();
+			.authorizeRequests()
+				.antMatchers(IGNORE_LIST).permitAll()
+				.anyRequest().authenticated();
 
-        http.addFilterBefore(tokenAuthenticationFilter(),
-        	UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(
+        		tokenAuthenticationFilter().permitAll(IGNORE_LIST),
+        		UsernamePasswordAuthenticationFilter.class);
     }
 
 	@Bean

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-end-deployment
+spec:
+  selector:
+    matchLabels:
+      app: front-end-container
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: front-end-container
+    spec:
+      containers:
+      - name: front-end
+        image: gcr.io/bankingapplication/front-end:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "50m"

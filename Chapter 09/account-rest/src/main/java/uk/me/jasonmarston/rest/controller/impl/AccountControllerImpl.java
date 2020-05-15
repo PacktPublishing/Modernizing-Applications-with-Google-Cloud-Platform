@@ -34,7 +34,7 @@ import uk.me.jasonmarston.domain.account.factory.details.TransactionIdentifierDe
 import uk.me.jasonmarston.domain.account.service.AccountService;
 import uk.me.jasonmarston.domain.account.value.Amount;
 import uk.me.jasonmarston.domain.user.aggregate.User;
-import uk.me.jasonmarston.event.impl.WithdrawalSucceededEvent;
+import uk.me.jasonmarston.event.bean.impl.WithdrawalSucceededEvent;
 import uk.me.jasonmarston.event.publisher.AccountEventPublisher;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 import uk.me.jasonmarston.rest.controller.AccountController;

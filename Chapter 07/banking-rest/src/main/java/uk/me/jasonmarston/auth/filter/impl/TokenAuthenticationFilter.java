@@ -1,8 +1,10 @@
-package uk.me.jasonmarston.rest.controller.authentication.impl;
+package uk.me.jasonmarston.auth.filter.impl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -16,12 +18,12 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.NestedServletException;
 
 import uk.me.jasonmarston.domain.aggregate.User;
-import uk.me.jasonmarston.domain.factory.details.RegistrationDetailsBuilderFactory;
 import uk.me.jasonmarston.domain.service.UserService;
 import uk.me.jasonmarston.framework.authentication.impl.JwtValidation;
 
@@ -29,14 +31,12 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 	private static final Logger LOGGER = 
 			LoggerFactory.getLogger(TokenAuthenticationFilter.class);
 	
+	private List<AntPathRequestMatcher> matchers =
+			new ArrayList<AntPathRequestMatcher>();
+
 	@Autowired
 	@Lazy
-	private UserService userService;
-	
-	@Autowired
-	@Lazy
-	private RegistrationDetailsBuilderFactory
-			registrationDetailsBuilderFactory;
+	private UserService authService;
 	
 	private JwtValidation auth = null;
 
@@ -47,6 +47,13 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 			logError(e);
 		}
 	}
+	
+	public TokenAuthenticationFilter permitAll(final String... patterns) {
+		for(final String pattern : patterns) {
+			matchers.add(new AntPathRequestMatcher(pattern));
+		}
+		return this;
+	}
 
 	@Override
 	protected void doFilterInternal(final HttpServletRequest request, 
@@ -54,14 +61,18 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 									final FilterChain filterChain)
 			throws ServletException, IOException {
 		try {
+			if(isUnsecured(request)) {
+				doChain(request, response, filterChain);
+				return;
+			}
 			final String jwt = getJwtFromRequest(request);
 			if (StringUtils.hasText(jwt)) {
 				User user = null;
 				try {
-					user = userService.sync(auth.verifyIdToken(jwt));
+					user = authService.sync(auth.verifyIdToken(jwt));
 				}
 				catch(RuntimeException e) {
-					user = userService.sync(auth.verifyIdToken(jwt));
+					user = authService.sync(auth.verifyIdToken(jwt));
 				}
 				user.setCredentials(jwt);
 
@@ -77,15 +88,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 				SecurityContextHolder.getContext()
 						.setAuthentication(authentication);
 
-				try {
-					filterChain.doFilter(request, response);
-				}
-				catch(final NestedServletException e) { 
-					logError(e);
-					response.sendError(
-							HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-							"Internal server error");
-				}
+				doChain(request, response, filterChain);
 			}
 			else {
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
@@ -112,6 +115,20 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 				user.getAuthorities());
 	}
 
+	private void doChain(final HttpServletRequest request, 
+			final HttpServletResponse response,
+			final FilterChain filterChain) throws IOException, ServletException {
+		try {
+			filterChain.doFilter(request, response);
+		}
+		catch(final NestedServletException e) { 
+			logError(e);
+			response.sendError(
+					HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+					"Internal server error");
+		}
+	}
+
 	private String getJwtFromRequest(final HttpServletRequest request) {
 		String bearerToken = request.getHeader("Authorization");
 		if (StringUtils.hasText(bearerToken)
@@ -120,6 +137,15 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 		}
 		return null;
     }
+	
+	private boolean isUnsecured(final HttpServletRequest request) {
+		for(AntPathRequestMatcher matcher : matchers) {
+			if(matcher.matches(request)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	private void logError(final Throwable e) {
 		final StringWriter stack = new StringWriter();

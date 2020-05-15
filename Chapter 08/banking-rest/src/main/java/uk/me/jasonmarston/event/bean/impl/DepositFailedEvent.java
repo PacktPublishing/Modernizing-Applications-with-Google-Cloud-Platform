@@ -1,11 +1,11 @@
-package uk.me.jasonmarston.event.impl;
+package uk.me.jasonmarston.event.bean.impl;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import uk.me.jasonmarston.domain.account.details.TransactionDetails;
+import uk.me.jasonmarston.domain.details.TransactionDetails;
 
-public class WithdrawalSucceededEvent {
+public class DepositFailedEvent {
 	private UUID accountId;
 	private UUID referenceAccountId;
 	private String description;
@@ -13,10 +13,10 @@ public class WithdrawalSucceededEvent {
 	private BigDecimal amount;
 	private boolean isCorrection;
 	
-	public WithdrawalSucceededEvent() {
+	public DepositFailedEvent() {
 	}
 
-	public WithdrawalSucceededEvent(TransactionDetails details) {
+	public DepositFailedEvent(TransactionDetails details) {
 		accountId = details.getAccountId().getId();
 		referenceAccountId = details.getReferenceAccountId().getId();
 		description = details.getDescription();

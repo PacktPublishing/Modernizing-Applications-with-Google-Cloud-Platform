@@ -10,8 +10,8 @@ import uk.me.jasonmarston.domain.factory.details.TransactionDetailsBuilderFactor
 import uk.me.jasonmarston.domain.factory.details.TransferIdentifierDetailsBuilderFactory;
 import uk.me.jasonmarston.domain.service.AccountService;
 import uk.me.jasonmarston.domain.value.Amount;
+import uk.me.jasonmarston.event.bean.impl.DepositFailedEvent;
 import uk.me.jasonmarston.event.handler.AbstractMessageHandler;
-import uk.me.jasonmarston.event.impl.DepositFailedEvent;
 import uk.me.jasonmarston.framework.domain.type.impl.EntityId;
 
 public class DepositFailureHandler extends AbstractMessageHandler {

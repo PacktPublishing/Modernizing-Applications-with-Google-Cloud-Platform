@@ -3,6 +3,8 @@ package uk.me.jasonmarston.auth.filter.impl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -28,8 +30,9 @@ import uk.me.jasonmarston.framework.authentication.impl.JwtValidation;
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 	private static final Logger LOGGER = 
 			LoggerFactory.getLogger(TokenAuthenticationFilter.class);
-
-	private static final AntPathRequestMatcher HEALTH_CHECK_MATCHER = new AntPathRequestMatcher("/healthcheck", "GET");
+	
+	private List<AntPathRequestMatcher> matchers =
+			new ArrayList<AntPathRequestMatcher>();
 
 	@Autowired
 	@Lazy
@@ -44,6 +47,13 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 			logError(e);
 		}
 	}
+	
+	public TokenAuthenticationFilter permitAll(final String... patterns) {
+		for(final String pattern : patterns) {
+			matchers.add(new AntPathRequestMatcher(pattern));
+		}
+		return this;
+	}
 
 	@Override
 	protected void doFilterInternal(final HttpServletRequest request, 
@@ -51,7 +61,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 									final FilterChain filterChain)
 			throws ServletException, IOException {
 		try {
-			if(HEALTH_CHECK_MATCHER.matches(request)) {
+			if(isUnsecured(request)) {
 				doChain(request, response, filterChain);
 				return;
 			}
@@ -97,7 +107,16 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         }
 	}
 
-	private void doChain(final HttpServletRequest request, final HttpServletResponse response,
+	private UsernamePasswordAuthenticationToken createAuthenticationToken(
+			final User user) {
+		return new UsernamePasswordAuthenticationToken(
+				user,
+				user.getCredentials(), 
+				user.getAuthorities());
+	}
+
+	private void doChain(final HttpServletRequest request, 
+			final HttpServletResponse response,
 			final FilterChain filterChain) throws IOException, ServletException {
 		try {
 			filterChain.doFilter(request, response);
@@ -110,14 +129,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 		}
 	}
 
-	private UsernamePasswordAuthenticationToken createAuthenticationToken(
-			final User user) {
-		return new UsernamePasswordAuthenticationToken(
-				user,
-				user.getCredentials(), 
-				user.getAuthorities());
-	}
-
 	private String getJwtFromRequest(final HttpServletRequest request) {
 		String bearerToken = request.getHeader("Authorization");
 		if (StringUtils.hasText(bearerToken)
@@ -126,6 +137,15 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 		}
 		return null;
     }
+	
+	private boolean isUnsecured(final HttpServletRequest request) {
+		for(AntPathRequestMatcher matcher : matchers) {
+			if(matcher.matches(request)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	private void logError(final Throwable e) {
 		final StringWriter stack = new StringWriter();

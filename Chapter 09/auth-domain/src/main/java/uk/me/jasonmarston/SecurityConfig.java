@@ -21,6 +21,8 @@ import uk.me.jasonmarston.auth.filter.impl.TokenAuthenticationFilter;
         prePostEnabled = true
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	private static final String[] IGNORE_LIST = { "/healthcheck" };
+
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
 		http
@@ -33,11 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.formLogin().disable()
 			.httpBasic().disable()
 			.authorizeRequests()
-				.antMatchers("/healthcheck").permitAll()
+				.antMatchers(IGNORE_LIST).permitAll()
 				.anyRequest().authenticated();
 
-        http.addFilterBefore(tokenAuthenticationFilter(),
-        	UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(
+        		tokenAuthenticationFilter().permitAll(IGNORE_LIST),
+        		UsernamePasswordAuthenticationFilter.class);
     }
 
 	@Bean
