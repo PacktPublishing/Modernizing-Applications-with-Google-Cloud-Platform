@@ -1,0 +1,25 @@
+steps:
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'account-env.yaml', '-f', 'account-deployment.yaml', '-f', 'account-hpa.yaml', '-f', 'account-service.yaml']
+  dir: 'Kubernetes/microservices/account'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=banking-cluster'
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'user-env.yaml', '-f', 'user-deployment.yaml', '-f', 'user-hpa.yaml', '-f', 'user-service.yaml']
+  dir: 'Kubernetes/microservices/user'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=banking-cluster'
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'front-end-deployment.yaml', '-f', 'front-end-hpa.yaml', '-f', 'front-end-service.yaml']
+  dir: 'Kubernetes/microservices/front-end'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=banking-cluster'
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'certificate.yaml', '-f', 'ingress.yaml']
+  dir: 'Kubernetes/ingress'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=banking-cluster'

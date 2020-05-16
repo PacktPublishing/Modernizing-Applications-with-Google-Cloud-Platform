@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: account-deployment
+  name: user-deployment
 spec:
   selector:
     matchLabels:
-      app: account-container
+      app: user-container
   replicas: 1
   template:
     metadata:
       labels:
-        app: account-container
+        app: user-container
     spec:
       containers:
-      - name: account
-        image: gcr.io/bankingapplication/account-rest:latest
+      - name: user
+        image: gcr.io/bankingapplication/user-rest:latest
         ports:
         - containerPort: 8080
         resources:
@@ -35,7 +35,7 @@ spec:
           readOnly: true
         envFrom:
         - secretRef:
-            name: env-secret
+            name: user-env-secret
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         command: ["/cloud_sql_proxy",

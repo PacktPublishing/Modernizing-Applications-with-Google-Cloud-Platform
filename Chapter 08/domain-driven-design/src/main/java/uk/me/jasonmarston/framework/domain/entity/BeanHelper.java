@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 @Service
-public abstract class BeanHelper {
+public class BeanHelper {
 	public static BeanHelper INSTANCE;
 	
 	@Autowired

@@ -19,10 +19,6 @@ spec:
             backend:
               serviceName: account-svc
               servicePort: 8080
-          - path: /user
-            backend:
-              serviceName: user-svc
-              servicePort: 8080
           - path: /user/*
             backend:
               serviceName: user-svc
