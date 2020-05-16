@@ -1,1 +1,0 @@
-angular.module('controller.locale', ['service.user']);
