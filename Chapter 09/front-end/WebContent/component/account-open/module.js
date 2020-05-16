@@ -1,1 +1,0 @@
-angular.module('component.accountOpen', ['service.account']);
