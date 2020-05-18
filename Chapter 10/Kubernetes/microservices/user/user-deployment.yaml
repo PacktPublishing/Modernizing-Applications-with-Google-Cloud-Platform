@@ -5,12 +5,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: user-container
+      name: user-pod
   replicas: 1
   template:
     metadata:
       labels:
-        app: user-container
+        name: user-pod
     spec:
       containers:
       - name: user

@@ -5,12 +5,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: account-container
+      name: account-pod
   replicas: 1
   template:
     metadata:
       labels:
-        app: account-container
+        name: account-pod
     spec:
       containers:
       - name: account

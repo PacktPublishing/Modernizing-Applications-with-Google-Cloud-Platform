@@ -5,12 +5,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: front-end-container
+      app: front-end-pod
   replicas: 1
   template:
     metadata:
       labels:
-        app: front-end-container
+        app: front-end-pod
     spec:
       containers:
       - name: front-end
