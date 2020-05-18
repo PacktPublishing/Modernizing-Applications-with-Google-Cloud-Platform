@@ -17,9 +17,3 @@ steps:
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=banking-cluster'
-- name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-f', 'certificate.yaml', '-f', 'ingress.yaml']
-  dir: 'Kubernetes/ingress'
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-c'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=banking-cluster'

@@ -11,6 +11,18 @@ spec:
     - host: www.banking.jasonmarston.me.uk
       http:
         paths:
+          - path: /account
+            backend:
+              serviceName: account-svc
+              servicePort: 8080
+          - path: /account/*
+            backend:
+              serviceName: account-svc
+              servicePort: 8080
+          - path: /user/*
+            backend:
+              serviceName: user-svc
+              servicePort: 8080
           - path:
             backend:
               serviceName: front-end-svc
