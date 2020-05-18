@@ -10,10 +10,10 @@ stringData:
   BANKING_LOGGING_LEVEL: WARN
   PUB_SUB_CREDENTIALS: file:/pubsub/pubsub.json
   GOOGLE_APPLICATION_CREDENTIALS: /firebase/firebase.json
-  USER_DATASOURCE_URL: jdbc:mysql://localhost:3306/user?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=yes&characterEncoding=UTF-8
-  ACCOUNT_DATASOURCE_URL: jdbc:mysql://localhost:3306/account?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=yes&characterEncoding=UTF-8
-  BANKING_INITIAL_ADMIN_EMAIL: jason@jasonmarston.me.uk
-  USER_DATASOURCE_USERNAME: bankinguser
-  USER_DATASOURCE_PASSWORD: L0n3wulf!
-  ACCOUNT_DATASOURCE_USERNAME: bankinguser
-  ACCOUNT_DATASOURCE_PASSWORD: L0n3wulf!
+  USER_DATASOURCE_URL: jdbc:mysql://localhost:3306/<user_database>?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=yes&characterEncoding=UTF-8
+  ACCOUNT_DATASOURCE_URL: jdbc:mysql://localhost:3306/<account_database>?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=yes&characterEncoding=UTF-8
+  BANKING_INITIAL_ADMIN_EMAIL: <admin_email_address>
+  USER_DATASOURCE_USERNAME: <user_username>
+  USER_DATASOURCE_PASSWORD: <user_password>
+  ACCOUNT_DATASOURCE_USERNAME: <account_username>
+  ACCOUNT_DATASOURCE_PASSWORD: <account_password>
