@@ -55,7 +55,7 @@ public class AccountControllerImpl implements AccountController {
 
     @Override
     @PreAuthorize("hasRole('USER')")
-	@RequestMapping(path = "/{id}/deposit",
+	@RequestMapping(path = "/account/{id}/deposit",
 		method=RequestMethod.POST,
 		consumes = "application/json",
 		produces = "application/json")
@@ -100,7 +100,7 @@ public class AccountControllerImpl implements AccountController {
 
     @Override
     @PreAuthorize("hasRole('USER')")
-    @RequestMapping(path = "/{id}", 
+    @RequestMapping(path = "/account/{id}", 
     	method=RequestMethod.GET,
     	produces = "application/json")
     public ResponseEntity<?> getAccount(@PathVariable("id") final UUID id,
@@ -118,7 +118,7 @@ public class AccountControllerImpl implements AccountController {
 
     @Override
     @PreAuthorize("hasRole('USER')")
-    @RequestMapping(path = "/", 
+    @RequestMapping(path = "/account", 
     	method=RequestMethod.GET,
     	produces = "application/json")
     public ResponseEntity<?> getAccounts(
@@ -135,7 +135,7 @@ public class AccountControllerImpl implements AccountController {
 
 	@Override
     @PreAuthorize("hasRole('USER')")
-	@RequestMapping(path = "/{id}/balance",
+	@RequestMapping(path = "/account/{id}/balance",
 		method=RequestMethod.GET,
 		produces = "application/json")
 	public ResponseEntity<?> getBalance(
@@ -155,7 +155,7 @@ public class AccountControllerImpl implements AccountController {
 
 	@Override
     @PreAuthorize("hasRole('USER')")
-	@RequestMapping(path = "/{accountId}/deposit/{id}",
+	@RequestMapping(path = "/account/{accountId}/deposit/{id}",
 		method=RequestMethod.GET,
 		produces = "application/json")
 	public ResponseEntity<?> getDeposit(
@@ -191,7 +191,7 @@ public class AccountControllerImpl implements AccountController {
 
 	@Override
     @PreAuthorize("hasRole('USER')")
-	@RequestMapping(path = "/{id}/deposit",
+	@RequestMapping(path = "/account/{id}/deposit",
 		method=RequestMethod.GET,
 		produces = "application/json")
 	public ResponseEntity<?> getDeposits(
@@ -216,7 +216,7 @@ public class AccountControllerImpl implements AccountController {
 
 	@Override
     @PreAuthorize("hasRole('USER')")
-	@RequestMapping(path = "/{accountId}/transaction/{id}",
+	@RequestMapping(path = "/account/{accountId}/transaction/{id}",
 		method=RequestMethod.GET,
 		produces = "application/json")
 	public ResponseEntity<?> getTransaction(
@@ -250,7 +250,7 @@ public class AccountControllerImpl implements AccountController {
 
 	@Override
     @PreAuthorize("hasRole('USER')")
-	@RequestMapping(path = "/{id}/transaction",
+	@RequestMapping(path = "/account/{id}/transaction",
 		method=RequestMethod.GET,
 		produces = "application/json")
 	public ResponseEntity<?> getTransactions(
@@ -275,7 +275,7 @@ public class AccountControllerImpl implements AccountController {
 
 	@Override
     @PreAuthorize("hasRole('USER')")
-	@RequestMapping(path = "/{accountId}/withdrawal/{id}",
+	@RequestMapping(path = "/account/{accountId}/withdrawal/{id}",
 		method=RequestMethod.GET,
 		produces = "application/json")
 	public ResponseEntity<?> getWithdrawal(
@@ -313,32 +313,40 @@ public class AccountControllerImpl implements AccountController {
 
 	@Override
     @PreAuthorize("hasRole('USER')")
-	@RequestMapping(path = "/{id}/withdrawal",
+	@RequestMapping(path = "/account/{id}/withdrawal",
 		method=RequestMethod.GET,
 		produces = "application/json")
 	public ResponseEntity<?> getWithdrawals(
 			@PathVariable("id") final UUID id,
 			@AuthenticationPrincipal final User user) {
-	final Account account = accountService.getAccount(new EntityId(id));
-	if(account == null || !account.getOwnerId().equals(user.getUid())) {
-		return ResponseEntity
-				.badRequest()
-				.body(new MessageBean("Invalid Account"));
+		final Account account = accountService.getAccount(new EntityId(id));
+		if(account == null || !account.getOwnerId().equals(user.getUid())) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageBean("Invalid Account"));
+		}
+
+		final List<Transaction> withdrawals = account.getWithdrawals();
+		final List<TransactionBean> withdrawalBeans =
+				new ArrayList<TransactionBean>();
+		for(Transaction withdrawal : withdrawals) {
+			withdrawalBeans.add(new TransactionBean(withdrawal));
+		}
+
+		return ResponseEntity.ok(withdrawalBeans);
 	}
 
-	final List<Transaction> withdrawals = account.getWithdrawals();
-	final List<TransactionBean> withdrawalBeans =
-			new ArrayList<TransactionBean>();
-	for(Transaction withdrawal : withdrawals) {
-		withdrawalBeans.add(new TransactionBean(withdrawal));
+	@Override
+	@RequestMapping(path = "/healthcheck",
+		method=RequestMethod.GET,
+		produces = "application/json")
+	public ResponseEntity<?> healthCheck() {
+   		return ResponseEntity.ok(new MessageBean("OK"));
 	}
-
-	return ResponseEntity.ok(withdrawalBeans);
-}
 
 	@Override
     @PreAuthorize("hasRole('USER')")
-    @RequestMapping(path = "/", 
+    @RequestMapping(path = "/account", 
     	method=RequestMethod.POST,
     	produces = "application/json")
     public ResponseEntity<?> openAccount(
@@ -358,12 +366,12 @@ public class AccountControllerImpl implements AccountController {
 
 	@Override
     @PreAuthorize("hasRole('USER')")
-	@RequestMapping(path = "/{id}/withdrawal",
+	@RequestMapping(path = "/account/{id}/withdrawal",
 		method=RequestMethod.POST,
 		consumes = "application/json",
 		produces = "application/json")
 	public ResponseEntity<?> withdrawFunds(@PathVariable("id") final UUID id,
-			@RequestBody final WithdrawalBean withdrawal,
+			@NotNull @Valid @RequestBody final WithdrawalBean withdrawal,
 			@AuthenticationPrincipal final User user) {
 		final Account account = accountService
 				.getAccount(new EntityId(id));

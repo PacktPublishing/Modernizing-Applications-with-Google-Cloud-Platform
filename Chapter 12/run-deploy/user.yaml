@@ -1,0 +1,23 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: user
+spec:
+  template:
+    metadata:
+      annotations:
+        run.googleapis.com/cloudsql-instances: bankingapplication:europe-west2:mysql-instance
+    spec:
+      containers:
+      - image: gcr.io/bankingapplication/user-rest:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+        env:
+        - name: BANKING_LOGGING_LEVEL
+          value: WARN
+        - name: GOOGLE_CLOUD_PROJECT
+          value: bankingapplication

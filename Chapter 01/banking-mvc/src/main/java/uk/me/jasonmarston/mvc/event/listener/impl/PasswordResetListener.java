@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import uk.me.jasonmarston.domain.aggregate.ResetToken;
+import uk.me.jasonmarston.domain.aggregate.impl.ResetToken;
 import uk.me.jasonmarston.domain.service.ResetTokenService;
 import uk.me.jasonmarston.mvc.event.impl.OnPasswordResetEvent;
 

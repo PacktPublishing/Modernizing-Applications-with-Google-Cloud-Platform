@@ -47,6 +47,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	runtimeOnly 'mysql:mysql-connector-java'
+
+	implementation 'org.springframework.cloud:spring-cloud-gcp-starter-secretmanager:1.2.2.RELEASE'
 	
 	implementation 'uk.me.jasonmarston.framework:domain-driven-design:1.0.0-SNAPSHOT'
 	implementation 'uk.me.jasonmarston.domain:user-core-domain:1.0.0-SNAPSHOT'

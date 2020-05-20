@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import org.springframework.context.ApplicationEvent;
 
-import uk.me.jasonmarston.domain.value.EmailAddress;
+import uk.me.jasonmarston.domain.value.impl.EmailAddress;
 
 public class OnPasswordResetEvent extends ApplicationEvent {
 	private static final long serialVersionUID = 1L;

@@ -3,7 +3,7 @@ package uk.me.jasonmarston.event.bean.impl;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import uk.me.jasonmarston.domain.details.TransactionDetails;
+import uk.me.jasonmarston.domain.details.impl.TransactionDetails;
 
 public class DepositFailedEvent {
 	private UUID accountId;

@@ -4,7 +4,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import uk.me.jasonmarston.domain.aggregate.User;
+import uk.me.jasonmarston.domain.aggregate.impl.User;
 
 public class AuthenticationHelper {
 	public static User getUser() {

@@ -23,7 +23,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.NestedServletException;
 
-import uk.me.jasonmarston.domain.aggregate.User;
+import uk.me.jasonmarston.domain.aggregate.impl.User;
 import uk.me.jasonmarston.domain.service.UserService;
 import uk.me.jasonmarston.framework.authentication.impl.JwtValidation;
 

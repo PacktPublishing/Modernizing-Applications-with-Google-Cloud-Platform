@@ -16,11 +16,11 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import uk.me.jasonmarston.domain.details.RegistrationDetails;
+import uk.me.jasonmarston.domain.details.impl.RegistrationDetails;
 import uk.me.jasonmarston.domain.factory.details.RegistrationDetailsBuilderFactory;
 import uk.me.jasonmarston.domain.service.UserService;
-import uk.me.jasonmarston.domain.value.EmailAddress;
-import uk.me.jasonmarston.domain.value.Password;
+import uk.me.jasonmarston.domain.value.impl.EmailAddress;
+import uk.me.jasonmarston.domain.value.impl.Password;
 
 // This is for development environments only.
 // Would be a major security violation in production.

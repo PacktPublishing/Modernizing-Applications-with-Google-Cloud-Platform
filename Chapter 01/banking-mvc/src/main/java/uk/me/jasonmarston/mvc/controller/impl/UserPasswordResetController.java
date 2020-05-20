@@ -21,13 +21,13 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import uk.me.jasonmarston.domain.aggregate.ResetToken;
-import uk.me.jasonmarston.domain.aggregate.User;
+import uk.me.jasonmarston.domain.aggregate.impl.ResetToken;
+import uk.me.jasonmarston.domain.aggregate.impl.User;
 import uk.me.jasonmarston.domain.service.ResetTokenService;
 import uk.me.jasonmarston.domain.service.UserService;
-import uk.me.jasonmarston.domain.value.EmailAddress;
-import uk.me.jasonmarston.domain.value.Password;
-import uk.me.jasonmarston.domain.value.Token;
+import uk.me.jasonmarston.domain.value.impl.EmailAddress;
+import uk.me.jasonmarston.domain.value.impl.Password;
+import uk.me.jasonmarston.domain.value.impl.Token;
 import uk.me.jasonmarston.mvc.alerts.impl.AlertDanger;
 import uk.me.jasonmarston.mvc.alerts.impl.AlertInfo;
 import uk.me.jasonmarston.mvc.controller.bean.impl.ForgottenPasswordBean;

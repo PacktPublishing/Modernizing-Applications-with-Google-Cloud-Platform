@@ -18,8 +18,8 @@ import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import uk.me.jasonmarston.domain.aggregate.User;
-import uk.me.jasonmarston.domain.aggregate.VerificationToken;
+import uk.me.jasonmarston.domain.aggregate.impl.User;
+import uk.me.jasonmarston.domain.aggregate.impl.VerificationToken;
 import uk.me.jasonmarston.domain.service.VerificationTokenService;
 import uk.me.jasonmarston.mvc.event.impl.OnRegistrationEvent;
 

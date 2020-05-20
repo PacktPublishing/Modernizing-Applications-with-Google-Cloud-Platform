@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: user-env-secret
+type: Opaque
+stringData:
+  BANKING_LOGGING_LEVEL: WARN
+  GOOGLE_APPLICATION_CREDENTIALS: /secrets/credentials.json
+  GOOGLE_CLOUD_PROJECT: bankingapplication

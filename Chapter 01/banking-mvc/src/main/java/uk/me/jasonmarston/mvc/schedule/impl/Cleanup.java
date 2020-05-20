@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import uk.me.jasonmarston.domain.aggregate.ResetToken;
-import uk.me.jasonmarston.domain.aggregate.User;
-import uk.me.jasonmarston.domain.aggregate.VerificationToken;
+import uk.me.jasonmarston.domain.aggregate.impl.ResetToken;
+import uk.me.jasonmarston.domain.aggregate.impl.User;
+import uk.me.jasonmarston.domain.aggregate.impl.VerificationToken;
 import uk.me.jasonmarston.domain.service.ResetTokenService;
 import uk.me.jasonmarston.domain.service.UserService;
 import uk.me.jasonmarston.domain.service.VerificationTokenService;

@@ -60,11 +60,11 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 									final HttpServletResponse response, 
 									final FilterChain filterChain)
 			throws ServletException, IOException {
+		if(isUnsecured(request)) {
+			doChain(request, response, filterChain);
+			return;
+		}
 		try {
-			if(isUnsecured(request)) {
-				doChain(request, response, filterChain);
-				return;
-			}
 			final String jwt = getJwtFromRequest(request);
 			if (StringUtils.hasText(jwt)) {
 				User user = null;
@@ -87,12 +87,11 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
 				SecurityContextHolder.getContext()
 						.setAuthentication(authentication);
-
-				doChain(request, response, filterChain);
 			}
 			else {
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
 					"Please provide credentials");
+				return;
 			}
         }
 		catch(final RuntimeException | Error e) {
@@ -100,11 +99,15 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 			response.sendError(
 					HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
 					"Internal server error");
+			return;
 		}
 		catch (final Exception e) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
 					"Please provide valid credentials");
+			return;
         }
+
+		doChain(request, response, filterChain);
 	}
 
 	private UsernamePasswordAuthenticationToken createAuthenticationToken(

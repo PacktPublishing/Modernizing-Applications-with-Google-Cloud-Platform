@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import org.springframework.context.ApplicationEvent;
 
-import uk.me.jasonmarston.domain.aggregate.User;
+import uk.me.jasonmarston.domain.aggregate.impl.User;
 
 public class OnRegistrationEvent extends ApplicationEvent {
 	private static final long serialVersionUID = 1L;

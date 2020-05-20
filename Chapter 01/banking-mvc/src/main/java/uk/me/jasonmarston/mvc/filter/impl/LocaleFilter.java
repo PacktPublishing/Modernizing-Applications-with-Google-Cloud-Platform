@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.LocaleResolver;
 
-import uk.me.jasonmarston.domain.aggregate.User;
+import uk.me.jasonmarston.domain.aggregate.impl.User;
 import uk.me.jasonmarston.mvc.controller.impl.AuthenticationHelper;
 
 public class LocaleFilter extends OncePerRequestFilter {
