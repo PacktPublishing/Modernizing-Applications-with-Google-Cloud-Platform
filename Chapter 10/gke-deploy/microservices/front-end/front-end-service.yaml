@@ -5,7 +5,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: front-end-container
+    app: front-end-pod
   ports:
   - protocol: TCP
     port: 80

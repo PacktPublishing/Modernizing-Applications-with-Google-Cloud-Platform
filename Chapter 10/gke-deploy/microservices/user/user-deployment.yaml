@@ -27,21 +27,18 @@ spec:
             scheme: HTTP
           initialDelaySeconds: 20
         volumeMounts:
-        - name: firebase-secret-volume
-          mountPath: /firebase
-          readOnly: true
-        - name: pubsub-secret-volume
-          mountPath: /pubsub
+        - name: credentials-secret-volume
+          mountPath: /secrets
           readOnly: true
         envFrom:
-        - secretRef:
-            name: user-env-secret
+        - configMapRef:
+            name: user-env-configmap
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         command: ["/cloud_sql_proxy",
                   "-instances=bankingapplication:europe-west2:mysql-instance=tcp:3306",
                   "-ip_address_types=PRIVATE",
-                  "-credential_file=/secrets/cloudsql.json"]
+                  "-credential_file=/secrets/credentials.json"]
         resources:
           requests:
             cpu: "50m"
@@ -49,16 +46,10 @@ spec:
           runAsUser: 2  # non-root user
           allowPrivilegeEscalation: false
         volumeMounts:
-          - name: cloudsql-secret-volume
+          - name: credentials-secret-volume
             mountPath: /secrets
             readOnly: true
       volumes:
-        - name: firebase-secret-volume
+        - name: credentials-secret-volume
           secret:
-            secretName: firebase-credentials-secret
-        - name: pubsub-secret-volume
-          secret:
-            secretName: pubsub-credentials-secret
-        - name: cloudsql-secret-volume
-          secret:
-            secretName: cloudsql-credentials-secret
+            secretName: credentials-secret

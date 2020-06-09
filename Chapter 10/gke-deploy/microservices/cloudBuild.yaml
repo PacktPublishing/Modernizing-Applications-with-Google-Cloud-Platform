@@ -12,7 +12,7 @@ steps:
   - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=banking-cluster'
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-f', 'front-end-deployment.yaml', '-f', 'front-end-hpa.yaml', '-f', 'front-end-service.yaml']
+  args: ['apply', '-f', 'nginx-config.yaml', '-f', 'front-end-deployment.yaml', '-f', 'front-end-hpa.yaml', '-f', 'front-end-service.yaml']
   dir: 'gke-deploy/microservices/front-end'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-c'

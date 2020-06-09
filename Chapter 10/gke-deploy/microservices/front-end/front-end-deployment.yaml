@@ -20,3 +20,11 @@ spec:
         resources:
           requests:
             cpu: "50m"
+        volumeMounts:
+        - name: nginx-configmap-volume
+          mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: nginx-configmap-volume
+          configMap:
+            name: nginx-configmap
+            
