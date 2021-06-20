@@ -1,0 +1,1 @@
+angular.module('component.accountDetail', ['service.account']);

@@ -1,8 +1,0 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-	<head>
-	</head>
-	<body>
-    	<a th:href="@{${host} + ${contextRoot} + '/user/registration/' + ${token} + '?locale=' +${locale}}" th:text="#{templates.email.registration.message}"></a>
-	</body>
-</html>

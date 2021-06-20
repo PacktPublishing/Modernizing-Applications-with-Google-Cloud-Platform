@@ -1,0 +1,27 @@
+<div class="row" ng-if="$ctrl.mode != 'enterNewPassword'">
+	<div class="col-md-4"></div>
+	<div class="col-md-4" align="center">
+		<div class="alert alert-info" ng-if="$ctrl.message" ng-bind="$ctrl.message"></div>
+		<div class="alert alert-danger" ng-if="$ctrl.error" ng-bind="$ctrl.error"></div>
+	</div>
+	<div class="col-md-4"></div>
+</div>
+<div class="row" ng-if="$ctrl.mode == 'enterNewPassword'">
+	<form id="change">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="newPassword" ng-bind="'auth.newPassword.label' | translate"></label>
+				<input pattern="{{$ctrl.strongPattern}}" data-required-error="{{'auth.newPassword.errors.required' | translate}}" data-pattern-error="{{'auth.newPassword.errors.pattern' | translate}}" id="newPassword" placeholder="{{'auth.newPassword.placeholder' | translate}}" type="password" ng-model="$ctrl.newPassword" class="form-control" required/>
+				<div class="help-block with-errors"></div>
+			</div>
+			<div class="form-group">
+				<label for="confirmPassword" ng-bind="'auth.confirmPassword.label' | translate">Confirm Password</label>
+				<input data-match="#newPassword" data-required-error="{{'auth.confirmPassword.errors.required' | translate}}" data-match-error="{{'auth.confirmPassword.errors.match' | translate}}" id="confirmPassword" placeholder="{{'auth.confirmPassword.placeholder' | translate}}" type="password" ng-model="$ctrl.confirmPassword" class="form-control" required/>
+				<div class="help-block with-errors"></div>
+			</div>
+			<button type="submit" class="btn btn-primary btn-block" ng-click="$ctrl.change()" ng-bind="'auth.submit' | translate"></button>
+		</div>
+		<div class="col-md-4"></div>
+	</form>
+</div>

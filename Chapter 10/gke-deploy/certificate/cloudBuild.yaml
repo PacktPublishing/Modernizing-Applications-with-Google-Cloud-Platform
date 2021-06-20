@@ -1,7 +1,0 @@
-steps:
-- name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-f', 'certificate.yaml']
-  dir: 'gke-deploy/ingress'
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-c'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=banking-cluster'

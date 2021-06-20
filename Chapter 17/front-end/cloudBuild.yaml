@@ -1,0 +1,8 @@
+steps:
+# Docker build and publish
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/front-end', '.']
+  dir: 'front-end'
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/run-front-end']
+  dir: 'front-end'

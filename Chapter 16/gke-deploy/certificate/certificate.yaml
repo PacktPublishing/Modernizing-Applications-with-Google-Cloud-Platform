@@ -1,0 +1,7 @@
+apiVersion: networking.gke.io/v1beta1
+kind: ManagedCertificate
+metadata:
+  name: banking-certificate
+spec:
+  domains:
+    - www.banking.jasonmarston.me.uk

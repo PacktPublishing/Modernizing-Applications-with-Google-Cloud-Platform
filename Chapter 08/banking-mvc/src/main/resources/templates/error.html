@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html th:replace="~{layout.html :: layout(~{::div})}" xmlns:th="http://www.thymeleaf.org">
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<div th:switch="${status}">
+						<div class="alert alert-danger text-center" role="alert">
+							<span th:case="400" th:text="#{error.page.validation}"></span>
+							<span th:case="403" th:text="#{error.page.authorisation}"></span>
+							<span th:case="404" th:text="#{error.page.notFound}"></span>
+							<span th:case="500" th:text="#{error.page.internal}"></span>
+							<span th:case="999" th:text="#{error.page.noError}"></span>
+							<span th:case="*" >
+								<!-- This should not be reached -->
+								<span th:text="${error}"></span> : <span th:text="${message}"></span>
+							</span>
+						</div>
+					</div>
+					<span th:text="${exception}">No exception</span>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+		</div>
+    </body>
+</html>

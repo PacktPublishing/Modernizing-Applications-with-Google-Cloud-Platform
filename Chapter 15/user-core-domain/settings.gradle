@@ -1,0 +1,17 @@
+pluginManagement {
+  repositories {
+      maven {
+   	    url "$System.env.artifactory_contextUrl/gradle-dev"
+       	credentials {
+			username = "$System.env.artifactory_user"
+			password = "$System.env.artifactory_password"
+		}
+      }
+      gradlePluginPortal()
+      ivy {
+        url 'ivy-repo'
+      }
+  }
+}
+
+rootProject.name = 'user-core-domain'
