@@ -1,9 +1,0 @@
-.metadata/
-Servers/
-RemoteSystemsTempFiles/
-.gradle/
-.settings/
-bin/
-build/
-.classpath
-.project
