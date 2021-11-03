@@ -1,6 +1,3 @@
-.metadata/
-Servers/
-RemoteSystemsTempFiles/
 .gradle/
 .settings/
 bin/
