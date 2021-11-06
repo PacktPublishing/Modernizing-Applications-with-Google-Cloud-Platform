@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html th:replace="~{layout.html :: layout(~{::div})}" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<body>
+		<div class="container">
+				<div class="col-md-4"></div>
+				<div class="col-md-4 text-center">
+					<a th:href="@{/}" th:text=#{application.home}></a>
+				</div>
+				<div class="col-md-4"></div>
+		</div>
+	</body>
+</html>
