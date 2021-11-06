@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html th:replace="~{layout.html :: layout(~{::div})}" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<body>
+		<div class="container">
+			<form data-toggle="validator" th:action="@{/user/password/reset}" th:object="${forgottenPasswordBean}" method="post">
+	        	<div class="row">
+					<div class="col-md-4"></div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="email" th:text="#{field.email.label}"></label>
+							<input th:data-required-error="#{field.email.error.required}" th:data-error="#{field.email.error.email}" th:field="*{email}" name="email" id="email" th:placeholder="#{field.email.placeholder}" type="email" class="form-control" required/>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="top-buffer-bg">
+							<button type="submit" class="btn btn-primary btn-block" th:text="#{resetPassword.submit}"></button>
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>
