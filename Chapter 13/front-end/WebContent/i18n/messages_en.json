@@ -1,0 +1,238 @@
+{
+	"title": "Internet Bank",
+	"home": "Home",
+	"profile": "Profile",
+	"changePassword": "Change Password",
+	"signout": "Sign Out",
+	"DEPOSIT": "Deposit",
+	"WITHDRAWAL": "Withdrawal",
+	"account": {
+		"withdraw": "Withdraw",
+		"deposit": "Deposit",
+		"transfer": "Transfer",
+		"heading": "Recent Transactions",
+		"date": "Date",
+		"description": "Description",
+		"type": "Type",
+		"amount": "Amount"
+	},
+	"accountList": {
+		"heading": "My Accounts",
+		"openAccount": "Open Account",
+		"name": "Name",
+		"balance": "Balance"
+	},
+	"accountOpen": {
+		"heading": "Open Account",
+		"submit": "Open Account",
+		"cancel": "Cancel",
+		"name": {
+			"label": "Account Name",
+			"placeholder": "Enter Account Name",
+			"errors": {
+				"required": "Account Name is Required"
+			}
+		}
+	},
+	"auth": {
+		"heading": "Change Password",
+		"submit": "Change Password",
+		"cancel": "Cancel",
+		"newPassword": {
+			"label": "New Password",
+			"placeholder": "Enter New Password",
+			"errors": {
+				"required": "New Password is Required",
+				"pattern": "Weak Password"
+			}
+		},
+		"confirmPassword": {
+			"label": "Confirm Password",
+			"placeholder": "Confirm Password",
+			"errors": {
+				"required": "Confirm Password is Required",
+				"match": "Passwords do not Match"
+			}
+		},
+		"errors": {
+			"reset": "Bad Password or Invalid/Expired Reset Link",
+			"verification": "Invalid or Expired Verification Link",
+			"default": "Invalid or Expired Link"
+		},
+		"messages": {
+			"reset": "Pasword Reset, you may now login",
+			"verification": "Email Verified, you may now login"
+		}
+	},
+	"change": {
+		"heading": "Change Password",
+		"submit": "Change Password",
+		"cancel": "Cancel",
+		"currentPassword": {
+			"label": "Current Password",
+			"placeholder": "Enter Current Password",
+			"errors": {
+				"required": "Current Password is Required"
+			}
+		},
+		"newPassword": {
+			"label": "New Password",
+			"placeholder": "Enter New Password",
+			"errors": {
+				"required": "New Password is Required",
+				"pattern": "Weak Password"
+			}
+		},
+		"confirmPassword": {
+			"label": "Confirm Password",
+			"placeholder": "Confirm Password",
+			"errors": {
+				"required": "Confirm Password is Required",
+				"match": "Passwords do not Match"
+			}
+		},
+		"error": {
+			"general": "Something Went Wrong",
+			"credentials": "Invalid Credentials"
+		}
+	},
+	"deposit": {
+		"funds": "Deposit Funds",
+		"cancel": "Cancel",
+		"amount": {
+			"label": "Amount",
+			"placeholder": "Enter Amount",
+			"errors": {
+				"range": "Amount must be positive and less than 1 million, with a maximum of 2 decimal places",
+				"required": "Amount is Required"
+			}
+		},
+		"description": {
+			"label": "Description",
+			"placeholder": "Enter Description",
+			"errors": {
+				"required": "Description is Required"
+			}
+		}
+	},
+	"locale": {
+		"en_UK": "UK English",
+		"en_US": "US English",
+		"en_CA": "Canadian English"
+	},
+	"reset": {
+		"heading": "Reset Password",
+		"submit": "Reset Password",
+		"cancel": "Cancel",
+		"email": {
+			"label": "Email Address",
+			"placeholder": "Enter Email Address",
+			"errors": {
+				"required": "Email Address is Required",
+				"invalid": "A Valid Email Address is Required"
+			}
+		},
+		"message": "Password Reset Email Sent",
+		"error": "Error Sending Password Reset Email"
+	},
+	"signin": {
+		"heading": "Sign In",
+		"submit": "Sign In",
+		"signup": "Sign Up",
+		"forgotten": "Forgotten Password",
+		"email": {
+			"label": "Email Address",
+			"placeholder": "Enter Email Address",
+			"errors": {
+				"required": "Email Address is Required",
+				"invalid": "A Valid Email Address is Required"
+			}
+		},
+		"password": {
+			"label": "Password",
+			"placeholder": "Enter Password",
+			"errors": {
+				"required": "Password is Required"
+			}
+		},
+		"error": "Invalid Credentials"
+	},
+	"signup": {
+		"heading": "Sign Up",
+		"submit": "Sign Up",
+		"cancel": "Cancel",
+		"email": {
+			"label": "Email Address",
+			"placeholder": "Enter Email Address",
+			"errors": {
+				"required": "Email Address is Required",
+				"invalid": "A Valid Email Address is Required"
+			}
+		},
+		"password": {
+			"label": "Password",
+			"placeholder": "Enter Password",
+			"errors": {
+				"required": "Password is Required",
+				"pattern": "Weak Password"
+			}
+		},
+		"confirmPassword": {
+			"label": "Confirm Password",
+			"placeholder": "Confirm Password",
+			"errors": {
+				"required": "Confirm Password is Required",
+				"match": "Passwords do not Match"
+			}
+		},
+		"error": "Unable to Register this User"
+	},
+	"transfer": {
+		"funds": "Transfer Funds",
+		"cancel": "Cancel",
+		"account": {
+			"label": "Destination Account",
+			"errors": {
+				"select": "Destination Account is Required"
+			}
+		},
+		"amount": {
+			"label": "Amount",
+			"placeholder": "Enter Amount",
+			"errors": {
+				"range": "Amount must be positive and less than 1 million, with a maximum of 2 decimal places",
+				"required": "Amount is Required"
+			}
+		},
+		"description": {
+			"label": "Description",
+			"placeholder": "Enter Description",
+			"errors": {
+				"required": "Description is Required"
+			}
+		}
+	},
+	"verify": {
+		"heading": "Verify Email Address",
+		"submit": "Verify Email Address"
+	},
+	"withdraw": {
+		"funds": "Withdraw Funds",
+		"cancel": "Cancel",
+		"amount": {
+			"label": "Amount",
+			"placeholder": "Enter Amount",
+			"errors": {
+				"range": "Amount must be positive and less than 1 million, with a maximum of 2 decimal places",
+				"required": "Amount is Required"
+			}
+		},
+		"description": {
+			"label": "Description",
+			"placeholder": "Enter Description",
+			"errors": {
+				"required": "Description is Required"
+			}
+		}
+	}
+}
