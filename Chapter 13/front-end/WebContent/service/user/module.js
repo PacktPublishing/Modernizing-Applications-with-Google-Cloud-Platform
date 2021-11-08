@@ -1,0 +1,1 @@
+angular.module('service.user', ['ngResource']);
