@@ -1,0 +1,36 @@
+<div ng-if="$ctrl.message == null">
+	<div class="row">
+		<h1ng-bind="'reset.heading' | translate"></h1>
+	</div>
+	<form id="reset">
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="email" ng-bind="'reset.email.label' | translate"></label>
+					<input id="email" data-error="{{'reset.email.errors.invalid' | translate}}" data-required-error="{{'reset.email.errors.required' | translate}}" placeholder="{{'reset.email.placeholder' | translate}}" type="email" ng-model="$ctrl.email" class="form-control" required/>
+					<div class="help-block with-errors"></div>
+					<div class="text-danger" ng-bind="$ctrl.error"></div>
+				</div>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-2">
+				<button type="submit" class="btn btn-primary btn-block" ng-click="$ctrl.reset()" ng-bind="'reset.submit' | translate"></button>
+			</div>
+			<div class="col-md-2">
+				<button type="button" class="btn btn-primary btn-block" ng-click="$ctrl.cancel()" ng-bind="'reset.cancel' | translate"></button>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+	</form>
+</div>
+<div class="row" ng-if="$ctrl.message">
+	<div class="col-md-4"></div>
+	<div class="col-md-4" align="center">
+		<div class="alert alert-info" ng-bind="$ctrl.message"></div>
+	</div>
+	<div class="col-md-4"></div>
+</div>
