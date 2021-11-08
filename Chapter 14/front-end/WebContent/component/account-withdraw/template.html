@@ -1,0 +1,37 @@
+<div ng-if="$ctrl.account && $ctrl.account.name">
+	<div class="row">
+		<h1 ng-bind="$ctrl.account.name"></h1>
+	</div>
+	<div class="row">
+		<h1 ng-bind="$ctrl.account.balance | number: 2"></h1>
+	</div>
+	<div class="row">&nbsp;</div>
+	<form id="withdraw">
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="amount" ng-bind="'withdraw.amount.label' | translate"></label>
+					<input min="0.01" max="999999.99" step="0.01" data-error="{{'withdraw.amount.errors.range' | translate}}" data-required-error="{{'withdraw.amount.errors.required' | translate}}" id="amount" placeholder="{{'withdraw.amount.placeholder' | translate}}" type="number" ng-model="$ctrl.amount" class="form-control" required/>
+					<div class="help-block with-errors"></div>
+				</div>
+				<div class="form-group">
+					<label for="amount" ng-bind="'withdraw.description.label' | translate"></label>
+					<input data-required-error="{{'withdraw.description.errors.required' | translate}}" id="amount" placeholder="{{'withdraw.description.placeholder' | translate}}" type="text" ng-model="$ctrl.description" class="form-control" required/>
+					<div class="help-block with-errors"></div>
+				</div>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-2">
+				<button type="submit" class="btn btn-primary btn-block" ng-click="$ctrl.withdraw()" ng-bind="'withdraw.funds' | translate"></button>
+			</div>
+			<div class="col-md-2">
+				<button type="button" class="btn btn-primary btn-block" ng-click="$ctrl.cancel()" ng-bind="'withdraw.cancel' | translate"></button>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+	</form>
+</div>
