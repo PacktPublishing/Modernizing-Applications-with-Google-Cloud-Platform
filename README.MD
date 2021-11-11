@@ -7,7 +7,7 @@ This is the code repository for [The Definitive Guide to Modernizing Application
 **Build a solid foundation in Google Cloud Platform to achieve the most lucrative IT certification**
 
 ## What is this book about?
-Legacy applications, which comprise 75�80% of all enterprise applications, often end up being stuck in data centers. Modernizing these applications to make them cloud-native will enable them to scale in a cloud environment without taking months or years to see benefits. This book will help software developers and solutions architects modernize their applications on Google Cloud and transform them into cloud-native applications. 
+Legacy applications, which comprise 75-80% of all enterprise applications, often end up being stuck in data centers. Modernizing these applications to make them cloud-native will enable them to scale in a cloud environment without taking months or years to see benefits. This book will help software developers and solutions architects modernize their applications on Google Cloud and transform them into cloud-native applications. 
 
 This book covers the following exciting features:
 * Understand the benefits of being a Google Certified Professional Cloud Architect
@@ -31,7 +31,7 @@ The code will look like the following:
 <!DOCTYPE html>
 <html th:fragment="layout (content)"
 xmlns:th=http://www.thymeleaf.org
-xmlns:sec="https://www.thymeleaf.org/thymeleaf-extrasspringsecurity3">
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extrasspringsecurity3">
 ```
 
 **Following is what you need for this book:**
