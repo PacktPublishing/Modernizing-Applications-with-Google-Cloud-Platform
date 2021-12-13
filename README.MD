@@ -51,7 +51,7 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 
 * Professional Cloud Architect � Google Cloud Certification Guide - Second Edition  [[Packt]](https://www.packtpub.com/product/professional-cloud-architect-google-cloud-certification-guide-second-edition/9781801812290?utm_source=github&utm_medium=repository&utm_campaign=9781801812290) [[Amazon]](https://www.amazon.com/dp/1801812292)
 
-## Get to Know the Author
+## Get to Know the Authors
 **Steve (Satish) Sangapu**
 has been working with software since 2000. He specializes in migrating and modernizing applications from monolith to containerized microservices as well as creating data engineering pipelines to mine vast amounts of structured and unstructured data. He has extensive experience successfully leading large, cross-functional, geographically dispersed teams utilizing modern Agile development methodologies while collaboratively effectively in creating high-performance, fault-tolerant, and high-availability systems. He also holds 7 patents from the United States Patent and Trademark office and certifications from Carnegie Mellon Software Engineering Institute and Google Cloud.
 
@@ -61,5 +61,5 @@ has been working in the IT industry since 2000. His experience spans diverse dom
 **Jason Marston**
 is a Cloud Solution Architect based in England. He was recruited by Microsoft because of his OSS background. Jason has worked with Java since version 1 and has a long history with open source. He has over 30 years' experience of developing software and now helps organizations migrate and modernize legacy applications to the cloud. Jason was an SME in the Worldwide Communities project at Microsoft and, as part of the leadership team for those communities, helped many people solve their problems by adopting Java on Azure. In his spare time, Jason reads science fiction books and has two children who think he is a geek/nerd.
 
-## Other books by the authors
+## Other books by the author
 * [Azure Serverless Computing Cookbook - Second Edition ](https://www.packtpub.com/product/azure-serverless-computing-cookbook-second-edition/9781789615265?utm_source=github&utm_medium=repository&utm_campaign=9781789615265)
