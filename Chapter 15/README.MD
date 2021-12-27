@@ -1,1 +1,1 @@
-# Chapter 08 - Introducing the Legacy Application
+# Chapter 15 - Handling Eventual Consistency with the Compensation Pattern

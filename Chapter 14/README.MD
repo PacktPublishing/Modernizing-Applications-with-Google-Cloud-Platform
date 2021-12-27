@@ -1,1 +1,5 @@
-# Chapter 13 - Refactoring the Front-End and exposing REST Services
+# Chapter 14 - Refactoring the Frontend and Exposing REST Services
+
+'banking-rest' in this chapter requires 'banking-domain' from Chapter 15
+
+

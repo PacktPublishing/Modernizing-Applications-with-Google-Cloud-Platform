@@ -1,10 +1,10 @@
 buildscript {
 	repositories {
 		maven {
-			//url "$System.env.artifactory_contextUrl"
+			url "$System.env.artifactory_contextUrl"
 			credentials {
-				//username = "$System.env.artifactory_user"
-				//password = "$System.env.artifactory_password"
+				username = "$System.env.artifactory_user"
+				password = "$System.env.artifactory_password"
 			}
     		}
 	}
@@ -18,7 +18,7 @@ plugins {
 	id 'com.jfrog.artifactory' version '4.11.0'
 	id 'java-library'
 	id 'war'
-	id 'org.springframework.boot' version "2.3.0.RC1"
+	id 'org.springframework.boot' version "2.3.0.RELEASE"
 	id "io.spring.dependency-management" version "1.0.9.RELEASE"
 }
 

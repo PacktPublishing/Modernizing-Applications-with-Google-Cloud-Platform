@@ -1,4 +1,4 @@
-# Chapter 09 - Exploring the Initial Architecture on Google Compute Engine
+# Chapter 09 - The Initial Architecture on Google Compute Engine
 
 # Additional Steps
 

@@ -1,1 +1,1 @@
-# Chapter 18 - Future Proof your App with Google Cloud Run
+# Chapter 18 - Future Proofing Your App with Google Cloud Run

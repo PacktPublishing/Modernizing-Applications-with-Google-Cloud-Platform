@@ -1,1 +1,1 @@
-# Chapter 17 - Going Serverless with Google App Engine (Flexible)
+# Chapter 17 - Going Serverless with Google App Engine
