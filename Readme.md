@@ -1,1 +1,0 @@
-# Modernizing Applications with Google Cloud Platform
