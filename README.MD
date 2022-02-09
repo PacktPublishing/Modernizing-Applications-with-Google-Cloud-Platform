@@ -49,7 +49,7 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 ### Related products
 * Architecting Google Cloud Solutions  [[Packt]](https://www.packtpub.com/product/architecting-google-cloud-solutions/9781800563308?utm_source=github&utm_medium=repository&utm_campaign=9781800563308) [[Amazon]](https://www.amazon.com/dp/1800563302)
 
-* Professional Cloud Architect � Google Cloud Certification Guide - Second Edition  [[Packt]](https://www.packtpub.com/product/professional-cloud-architect-google-cloud-certification-guide-second-edition/9781801812290?utm_source=github&utm_medium=repository&utm_campaign=9781801812290) [[Amazon]](https://www.amazon.com/dp/1801812292)
+* Professional Cloud Architect Google Cloud Certification Guide - Second Edition  [[Packt]](https://www.packtpub.com/product/professional-cloud-architect-google-cloud-certification-guide-second-edition/9781801812290?utm_source=github&utm_medium=repository&utm_campaign=9781801812290) [[Amazon]](https://www.amazon.com/dp/1801812292)
 
 ## Get to Know the Authors
 **Steve (Satish) Sangapu**
